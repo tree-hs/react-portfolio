@@ -1,0 +1,60 @@
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+//   max-width: 1280px;
+  max-width: calc(100% - 10rem);
+  margin: 0 auto;
+  padding: 2rem;
+}
+ul {
+  padding: 0;
+  list-style: none;
+}
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+.skill-chip {
+  border: 0;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: #f5f6f8;
+  font-size: 14px;
+  cursor: pointer;
+  color:#222;
+}
+
+.skill-chip.is-active {
+  background: #e0ecff;
+  color: #1f4fff;
+  font-weight: 600;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}

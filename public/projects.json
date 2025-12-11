@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "title": "프론트 포트폴리오 사이트",
+    "skills": ["React", "TypeScript", "Next.js", "Zustand"],
+    "description": "Next.js와 TS로 만든 개인 포트폴리오 사이트"
+  },
+  {
+    "id": 2,
+    "title": "REST API 대시보드",
+    "skills": ["React", "RestAPI"],
+    "description": "외부 API에서 데이터를 가져오는 대시보드"
+  }
+]

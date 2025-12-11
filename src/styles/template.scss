@@ -1,0 +1,191 @@
+@use "./palette.legacy" as pal;
+
+$cardColorList :
+  "white" var(--white),
+  "black" var(--black),
+  "blue50" var(--blue50),
+  "blue100" var(--blue100),
+  "blue200" var(--blue200),
+  "blue300" var(--blue300),
+  "blue400" var(--blue400),
+  "blue500" var(--blue500),
+  "blue600" var(--blue600),
+  "gray50" var(--gray50),
+  "gray100" var(--gray100),
+  "gray200" var(--gray200),
+  "gray300" var(--gray300),
+  "gray400" var(--gray400),
+  "gray500" var(--gray500),
+  "gray600" var(--gray600),
+  "gray700" var(--gray700),
+  "gray800" var(--gray800),
+  "gray900" var(--gray900),
+  "green400" var(--green400);
+@each $card-name, $cardColor in $cardColorList {
+  .bd-#{$card-name} { border:1px solid $cardColor }
+  .bdt-#{$card-name} { border-top:1px solid $cardColor }
+  .bdb-#{$card-name} { border-bottom:1px solid $cardColor }
+  .bdl-#{$card-name} { border-left:1px solid $cardColor }
+  .bdr-#{$card-name} { border-right:1px solid $cardColor }
+  .bdn { border:none }
+  .bdn_ipt { border:none!important; }
+}
+
+@mixin emit-color-vars($map) {
+  @each $name, $value in $map {
+    #{'--'}#{"" + $name}: #{$value}; // ← "" + $name 로 문자열화
+    .#{$name} { color: $value }
+    .bg-#{$name} { background-color: $value }
+    .bd-#{$name} { border:1px solid $value }
+    .bdt-#{$name} { border-top:1px solid $value }
+    .bdb-#{$name} { border-bottom:1px solid $value }
+    .bdl-#{$name} { border-left:1px solid $value }
+    .bdr-#{$name} { border-right:1px solid $value }
+  }
+}
+.bdn { border:none }
+.bdn_ipt { border:none!important; }
+
+:root {
+  @include emit-color-vars(pal.$palette-light);
+  --bg: var(--gray50);
+  --fg: var(--gray900);
+  --muted: var(--gray500);
+  --border: var(--gray200);
+  --primary: var(--blue600);
+  --primary-fg: var(--white);
+  --success: var(--green500);
+  --success-fg: var(--white);
+  --danger: var(--red400);
+  --danger-fg: var(--white);
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    @include emit-color-vars(pal.$palette-dark);
+    --bg: var(--gray50);        /* = #0f1115 */
+    --fg: var(--gray900);       /* = #ffffff */
+    --muted: var(--gray500);    /* = #9aa4b2 */
+    --border: var(--gray200);   /* = #1f232a */
+    --primary: var(--blue500);  /* 다크에서 더 빛나는 톤 */
+    --primary-fg: var(--black);
+    --success: var(--green500);
+    --success-fg: var(--black);
+    --danger: var(--red400);
+    --danger-fg: var(--black);
+  }
+}
+html[data-theme="light"] { @include emit-color-vars(pal.$palette-light); }
+html[data-theme="dark"]  { @include emit-color-vars(pal.$palette-dark); }
+
+.mg-auto{ margin: auto; }
+@mixin mg-scale-while($prefix, $properties, $max: 100, $unit: px, $step: 2) {
+  .#{$prefix}0 {
+    @each $prop in $properties { #{$prop}: 0#{$unit}; }
+  }
+  .#{$prefix}1 {
+    @each $prop in $properties { #{$prop}: 1#{$unit}; }
+  }
+  $n: 2;
+  @while $n <= $max {
+    .#{$prefix}#{$n} {
+      @each $prop in $properties { #{$prop}: #{$n}#{$unit}; }
+    }
+    $n: $n + $step;
+  }
+}
+@mixin gap-scale-while($prefix, $properties, $max: 100, $unit: px, $step: 2) {
+  $n: 0;
+  @while $n <= $max {
+    [class*="#{$prefix}#{$n}"] {
+      @each $prop in $properties { #{$prop}: #{$n}#{$unit}; }
+    }
+    $n: $n + $step;
+  }
+}
+// @include mg-scale-while('pd-test', margin, 80); // ~mg80
+@include mg-scale-while('mg', margin);
+@include mg-scale-while('mgt', margin-top);
+@include mg-scale-while('mgb', margin-bottom);
+@include mg-scale-while('mgl', margin-left);
+@include mg-scale-while('mgr', margin-right);
+@include mg-scale-while('mgx', margin-inline);
+@include mg-scale-while('mgy', margin-block);
+@include mg-scale-while('pd', padding);
+@include mg-scale-while('pdt', padding-top);
+@include mg-scale-while('pdb', padding-bottom);
+@include mg-scale-while('pdl', padding-left);
+@include mg-scale-while('pdr', padding-right);
+@include mg-scale-while('pdx', padding-inline);
+@include mg-scale-while('pdy', padding-block);
+@include gap-scale-while('_gp', gap);
+@include gap-scale-while('_xgp', column-gap);
+@include gap-scale-while('_ygp', row-gap);
+
+// font-size
+@mixin txt-scale-while($prefix, $property, $max: 80, $unit: px) {
+    .#{$prefix}0 { #{$property}: 0#{$unit}; }
+    $n: 10;
+    @while $n <= $max {
+        [class*="#{$prefix}#{$n}"] { 
+            #{$property}: #{$n}#{$unit}; 
+            &[class*="-line"] { line-height: 1.5em }
+        }
+        $n: $n + 2;
+    }
+}
+@include txt-scale-while('fs', font-size, 64);
+
+/* font-Weight */
+@for $i from 1 through 9 {
+  $w: $i * 100;
+  .fw#{$w} { font-weight: $w; }
+}
+
+.rel { position: relative }
+
+
+/* flex & grid */
+[class*="flx"] {
+  display: flex;
+  &[class*="_btw"] { justify-content: space-between }
+  &[class*="_ct"] { justify-content: center }
+  &[class*="_ed"] { justify-content: flex-end }
+  &[class*='_ved']{ align-items: flex-end }
+  &[class*='_vct']{ align-items: center }
+  &[class*='_all-ct']{ justify-content: center; align-items: center }
+  &[class*='_wrap'] { flex-wrap:wrap }
+}
+
+[class*="grid"] {
+  $grid-min: 2;
+  $grid-max: 12;
+  display: grid;
+  @for $n from $grid-min through $grid-max {
+    /* n등분 */
+    [class*="_1/#{$n}"] { grid-template-columns: repeat(#{$n}, minmax(0, 1fr)); }
+    /* 2열 비율 */
+    @if $n > 2 {
+      @for $k from 2 through ($n - 1) {
+        [class*="_#{$k}/#{$n}"] { grid-template-columns: #{$k}fr #{($n - $k)}fr; }
+      }
+    }
+  }
+}
+
+hr {
+  border:none;
+  border-top:1px solid var(--gray100);
+  margin:0;
+  &.line1 { border-width: 1px }
+  &.line2 { border-width: 2px }
+}
+.w-full { width:100% }
+.h-full { height:100% }
+.vh-full { height:100vh }
+.hmin-full { min-height: 100vh }
+.center { text-align: center }
+.hidden { display: none }
+
+.fx1 { flex:1 }
+.fx2 { flex:2 }
+.fx3 { flex:3 }
