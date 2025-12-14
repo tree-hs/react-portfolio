@@ -1,20 +1,105 @@
+/* =========================
+  1) Base (기존 :root 기반)
+========================= */
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  /* 기본값은 다크로 두고, 테마에서 변수로 교체 */
+  color-scheme: dark;
+
+  /* ---- theme tokens (CSS Variables) ---- */
+  --bg: #242424;
+  --text: rgba(255, 255, 255, 0.87);
+  --muted: #888;
+
+  --link: #646cff;
+  --link-hover: #535bf2;
+
+  --btn-bg: #1a1a1a;
+  --btn-bg-hover: #2a2a2a;
+
+  /* skill chip */
+  --chip-bg: #2a2a2a; // 다크에서 chip 배경(원하면 수정)
+  --chip-text: #f0f0f0;
+  --chip-active-bg: #2b3dff; // 다크 active 배경(원하면 수정)
+  --chip-active-text: #ffffff;
+}
+
+/* 실제 적용 */
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  transition: background 0.2s;
+}
+
+/* =========================
+  2) Theme overrides
+========================= */
+
+/* light */
+body[data-theme="light"] {
+  color-scheme: light;
+
+  --bg: #ffffff;
+  --text: #213547;
+  --muted: #888;
+
+  --link: #646cff;
+  --link-hover: #747bff;
+
+  --btn-bg: #f9f9f9;
+  --btn-bg-hover: #ececec;
+
+  /* 기존 App.scss의 chip 컬러 그대로 사용 */
+  --chip-bg: #f5f6f8;
+  --chip-text: #222;
+  --chip-active-bg: #e0ecff;
+  --chip-active-text: #1f4fff;
+}
+
+/* dark (명시적으로도 지원) */
+body[data-theme="dark"] {
+  color-scheme: dark;
+
+  --bg: #242424;
+  --text: rgba(255, 255, 255, 0.87);
+
+  --link-hover: #535bf2;
+
+  --btn-bg: #1a1a1a;
+  --btn-bg-hover: #2a2a2a;
+
+  --chip-bg: #2a2a2a;
+  --chip-text: #f0f0f0;
+  --chip-active-bg: #2b3dff;
+  --chip-active-text: #ffffff;
+}
+
+/* (선택) data-theme가 아직 없을 때는 OS 테마 따라가기 */
+@media (prefers-color-scheme: light) {
+  body:not([data-theme]) {
+    color-scheme: light;
+    --bg: #ffffff;
+    --text: #213547;
+    --link-hover: #747bff;
+    --btn-bg: #f9f9f9;
+
+    --chip-bg: #f5f6f8;
+    --chip-text: #222;
+    --chip-active-bg: #e0ecff;
+    --chip-active-text: #1f4fff;
+  }
 }
 
 #root {
-//   max-width: 1280px;
+  //   max-width: 1280px;
   max-width: calc(100% - 10rem);
   margin: 0 auto;
   padding: 2rem;
@@ -23,26 +108,43 @@ ul {
   padding: 0;
   list-style: none;
 }
+
+a {
+  color: var(--link);
+  text-decoration: inherit;
+
+  &:hover {
+    color: var(--link-hover);
+  }
+}
+
+button {
+  background-color: var(--btn-bg);
+
+  &:hover {
+    background-color: var(--btn-bg-hover);
+  }
+}
 .card {
   padding: 2em;
 }
-
 .read-the-docs {
-  color: #888;
+  color: var(--muted);
 }
+/* skill-chip 기존 스타일을 변수로 전환 */
 .skill-chip {
   border: 0;
   padding: 8px 16px;
   border-radius: 999px;
-  background: #f5f6f8;
+  background: var(--chip-bg);
   font-size: 14px;
   cursor: pointer;
-  color:#222;
+  color: var(--chip-text);
 }
 
 .skill-chip.is-active {
-  background: #e0ecff;
-  color: #1f4fff;
+  background: var(--chip-active-bg);
+  color: var(--chip-active-text);
   font-weight: 600;
 }
 
