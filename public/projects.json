@@ -3,7 +3,7 @@
     "id": 1,
     "title": "프론트 포트폴리오 사이트",
     "skills": ["React", "TypeScript", "Next.js", "Zustand"],
-    "description": "Next.js와 TS로 만든 개인 포트폴리오 사이트"
+    "description": "React 실무경력 많지 않아서 따로 제출용으로 만든 포트폴리오"
   },
   {
     "id": 2,

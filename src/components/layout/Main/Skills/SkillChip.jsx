@@ -1,4 +1,4 @@
-import useSkillStore from "../store/useSkillStore";
+import useSkillStore from "./useSkillStore";
 
 function SkillChip({ label }) {
   const { selectedSkill, setSelectedSkill } = useSkillStore();

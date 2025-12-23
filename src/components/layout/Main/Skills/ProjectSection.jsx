@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import useSkillStore from "../store/useSkillStore";
+import useSkillStore from "./useSkillStore";
 
 function ProjectSection() {
   const [projects, setProjects] = useState([]);
@@ -12,9 +12,10 @@ function ProjectSection() {
       .catch((err) => console.error("Failed to load projects", err));
   }, []);
 
-  const filtered = selectedSkill === "All"
-    ? projects
-    : projects.filter((p) => p.skills.includes(selectedSkill));
+  const filtered =
+    selectedSkill === "All"
+      ? projects
+      : projects.filter((p) => p.skills.includes(selectedSkill));
 
   return (
     <section className="project-section">
@@ -24,9 +25,7 @@ function ProjectSection() {
           <li key={project.id} className="project-card">
             <h3>{project.title}</h3>
             <p>{project.description}</p>
-            <p className="project-skills">
-              {project.skills.join(", ")}
-            </p>
+            <p className="project-skills">{project.skills.join(", ")}</p>
           </li>
         ))}
       </ul>
