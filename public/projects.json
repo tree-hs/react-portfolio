@@ -2,13 +2,54 @@
   {
     "id": 1,
     "title": "프론트 포트폴리오 사이트",
+<<<<<<< ours
     "skills": ["React", "RestAPI", "TypeScript"],
     "description": "React 실무경력 많지 않아서 따로 제출용으로 만든 포트폴리오"
+=======
+    "skills": ["React", "TypeScript", "Next.js", "Zustand"],
+    "description": "React 실무경력 많지 않아서 따로 제출용으로 만든 포트폴리오",
+    "difficulty": "intermediate",
+    "durationWeeks": 6,
+    "period": { "start": "2024-06-01", "end": "2024-07-15" },
+    "repository": "https://github.com/example/react-portfolio",
+    "demoUrl": "https://portfolio.example.com",
+    "teamSize": 1
+>>>>>>> theirs
   },
   {
     "id": 2,
     "title": "REST API 대시보드",
-    "skills": ["React", "RestAPI"],
-    "description": "외부 API에서 데이터를 가져오는 대시보드"
+    "skills": ["React", "RestAPI", "TypeScript"],
+    "description": "외부 API에서 데이터를 가져오는 대시보드",
+    "difficulty": "advanced",
+    "durationWeeks": 10,
+    "period": { "start": "2023-10-01", "end": "2024-01-15" },
+    "repository": "https://github.com/example/react-api-dashboard",
+    "demoUrl": "https://dashboard.example.com",
+    "teamSize": 3
+  },
+  {
+    "id": 3,
+    "title": "모바일 퍼스트 뉴스 피드",
+    "skills": ["React Native", "GraphQL", "TypeScript"],
+    "description": "모바일 환경에서 빠른 뉴스 탐색을 위한 피드 앱",
+    "difficulty": "intermediate",
+    "durationWeeks": 12,
+    "period": { "start": "2024-02-01", "end": "2024-04-30" },
+    "repository": "https://github.com/example/mobile-feed",
+    "demoUrl": "https://feed.example.com",
+    "teamSize": 4
+  },
+  {
+    "id": 4,
+    "title": "접근성 개선 웹사이트",
+    "skills": ["React", "Lighthouse", "Vite"],
+    "description": "Lighthouse 리포트를 기반으로 접근성 점수를 개선",
+    "difficulty": "beginner",
+    "durationWeeks": 3,
+    "period": { "start": "2024-11-01" },
+    "repository": "https://github.com/example/a11y-site",
+    "demoUrl": "https://a11y.example.com",
+    "teamSize": 2
   }
 ]
