@@ -21,8 +21,10 @@ const DEFAULT_FILTERS: FilterState = {
   sort: "recent",
 };
 
-const isValidOption = <T extends string>(value: string | null, list: readonly T[]): value is T =>
-  !!value && (list as string[]).includes(value);
+const isValidOption = <T extends string>(
+  value: string | null,
+  list: readonly T[]
+): value is T => !!value && (list as string[]).includes(value);
 
 const parseFilters = (searchParams: URLSearchParams): FilterState => {
   const stack = searchParams.get("stack");
@@ -35,7 +37,9 @@ const parseFilters = (searchParams: URLSearchParams): FilterState => {
     difficulty: isValidOption(difficulty, DIFFICULTY_OPTIONS)
       ? difficulty
       : DEFAULT_FILTERS.difficulty,
-    duration: isValidOption(duration, DURATION_OPTIONS) ? duration : DEFAULT_FILTERS.duration,
+    duration: isValidOption(duration, DURATION_OPTIONS)
+      ? duration
+      : DEFAULT_FILTERS.duration,
     sort: sort === "duration" ? "duration" : DEFAULT_FILTERS.sort,
   };
 };
@@ -51,8 +55,10 @@ function ProjectPage() {
     const params = new URLSearchParams();
 
     if (next.stack && next.stack !== "All") params.set("stack", next.stack);
-    if (next.difficulty && next.difficulty !== "all") params.set("difficulty", next.difficulty);
-    if (next.duration && next.duration !== "all") params.set("duration", next.duration);
+    if (next.difficulty && next.difficulty !== "all")
+      params.set("difficulty", next.difficulty);
+    if (next.duration && next.duration !== "all")
+      params.set("duration", next.duration);
     params.set("sort", next.sort);
 
     setSearchParams(params, { replace: false });

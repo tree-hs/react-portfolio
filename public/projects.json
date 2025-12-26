@@ -2,11 +2,7 @@
   {
     "id": 1,
     "title": "프론트 포트폴리오 사이트",
-<<<<<<< ours
     "skills": ["React", "RestAPI", "TypeScript"],
-    "description": "React 실무경력 많지 않아서 따로 제출용으로 만든 포트폴리오"
-=======
-    "skills": ["React", "TypeScript", "Next.js", "Zustand"],
     "description": "React 실무경력 많지 않아서 따로 제출용으로 만든 포트폴리오",
     "difficulty": "intermediate",
     "durationWeeks": 6,
@@ -14,7 +10,6 @@
     "repository": "https://github.com/example/react-portfolio",
     "demoUrl": "https://portfolio.example.com",
     "teamSize": 1
->>>>>>> theirs
   },
   {
     "id": 2,
