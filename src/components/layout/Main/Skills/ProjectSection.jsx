@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import useSkillStore from "./useSkillStore";
+import useSkillStore from "./layout/Main/Skills/useSkillStore";
 
 function ProjectSection() {
   const [projects, setProjects] = useState([]);

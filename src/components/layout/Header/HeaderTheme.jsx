@@ -30,8 +30,11 @@ function HeaderTheme() {
 
   return (
     <div className="theme-toggle">
-      <label htmlFor="themeBtn">{isDark ? "dark mode" : "light mode"}</label>
-
+      <label htmlFor="themeBtn">
+        <p>눈 아파서 만듬</p>
+        <span>-</span>
+        {isDark ? "dark mode" : "light mode"}
+      </label>
       <input
         type="checkbox"
         id="themeBtn"
