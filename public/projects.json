@@ -13,38 +13,26 @@
   },
   {
     "id": 2,
-    "title": "React API 대시보드",
-    "skills": ["React", "React API", "TypeScript"],
-    "description": "외부 API에서 데이터를 가져오는 대시보드",
-    "difficulty": "고급",
-    "durationWeeks": 10,
-    "period": { "start": "2023-10-01", "end": "2024-01-15" },
-    "repository": "https://github.com/example/react-api-dashboard",
-    "demoUrl": "https://dashboard.example.com",
-    "teamSize": 3
+    "title": "Sound Book",
+    "skills": ["Html", "Css", "JavaScript", "Jquery"],
+    "description": "장애인 도서관",
+    "difficulty": "중급",
+    "durationWeeks": 4,
+    "period": { "start": "2022-10-01", "end": "2022-10-31" },
+    "repository": "https://github.com/tree-hs/react-portfolio",
+    "demoUrl": "",
+    "teamSize": 1
   },
   {
     "id": 3,
-    "title": "모바일 퍼스트 뉴스 피드",
-    "skills": ["React Native", "GraphQL", "TypeScript"],
-    "description": "모바일 환경에서 빠른 뉴스 탐색을 위한 피드 앱",
-    "difficulty": "중급",
+    "title": "회원관리 게시판 (비공개)",
+    "skills": ["Php", "PhpMySql", "Html", "Css", "JavaScript"],
+    "description": "php Data Controller",
+    "difficulty": "초급",
     "durationWeeks": 12,
     "period": { "start": "2024-02-01", "end": "2024-04-30" },
-    "repository": "https://github.com/example/mobile-feed",
-    "demoUrl": "https://feed.example.com",
-    "teamSize": 4
-  },
-  {
-    "id": 4,
-    "title": "접근성 개선 웹사이트",
-    "skills": ["React", "Lighthouse", "Vite"],
-    "description": "Lighthouse 리포트를 기반으로 접근성 점수를 개선",
-    "difficulty": "초급",
-    "durationWeeks": 3,
-    "period": { "start": "2024-11-01" },
-    "repository": "https://github.com/example/a11y-site",
-    "demoUrl": "https://a11y.example.com",
-    "teamSize": 2
+    "repository": "https://github.com/tree-hs/data-select-php",
+    "demoUrl": "",
+    "teamSize": 1
   }
 ]

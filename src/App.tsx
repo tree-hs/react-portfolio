@@ -1,6 +1,7 @@
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Route, Routes, useParams, useSearchParams } from "react-router-dom";
 import Filters, { FilterState } from "./components/Filters/Filters";
+import type { Project } from "./types/project";
 import ProjectDetail from "./components/ProjectDetail/ProjectDetail";
 import ProjectList from "./components/ProjectList/ProjectList";
 import Footer from "./components/layout/Footer";
@@ -48,6 +49,29 @@ function ProjectPage() {
   const { projectId } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
 
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [loadError, setLoadError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const url = `${import.meta.env.BASE_URL}projects.json`;
+
+    fetch(url)
+      .then((r) => {
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        return r.json();
+      })
+      .then((data) => {
+        // projects.json이 배열이든 {projects,total}든 둘 다 대응
+        const list: Project[] = Array.isArray(data) ? data : data.projects;
+        setProjects(list ?? []);
+        setLoadError(null);
+      })
+      .catch((e) => {
+        setProjects([]);
+        setLoadError(e instanceof Error ? e.message : String(e));
+      });
+  }, []);
+
   const filters = useMemo(() => parseFilters(searchParams), [searchParams]);
   const activeId = projectId ? Number(projectId) : null;
 
@@ -66,7 +90,12 @@ function ProjectPage() {
 
   return (
     <>
-      <Filters filters={filters} onChange={handleFilterChange} />
+      <Filters
+        filters={filters}
+        onChange={handleFilterChange}
+        projects={projects}
+      />
+      {loadError && <p>Failed to fetch: {loadError}</p>}
       <ProjectList filters={filters} activeProjectId={activeId} />
       <ProjectDetail projectId={activeId} filters={filters} />
     </>

@@ -3,12 +3,16 @@ import SkillChip from "./SkillChip";
 const SKILLS = [
   "All",
   "React",
-  "RestAPI",
   "TypeScript",
-  "React Native",
   "Next.js",
-  "Zustand",
-  "Lighthouse",
+  "React API",
+  "Vite",
+  "PhpMySql",
+  "Php",
+  "Html",
+  "Css",
+  "JavaScript",
+  "Jquery",
 ];
 
 function SkillSection() {

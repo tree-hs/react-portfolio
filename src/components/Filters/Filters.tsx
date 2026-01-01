@@ -4,7 +4,7 @@ import {
   DURATION_OPTIONS,
   STACK_OPTIONS,
 } from "../../api/projects";
-import { ProjectQueryParams, Skill } from "../../types/project";
+import type { Project, ProjectQueryParams, Skill } from "../../types/project";
 
 export interface FilterState {
   stack: Skill | "All";
@@ -16,6 +16,7 @@ export interface FilterState {
 interface FiltersProps {
   filters: FilterState;
   onChange: (next: FilterState) => void;
+  projects: Project[]; // ✅ 추가
 }
 
 const labelForDuration = (duration: FilterState["duration"]): string => {
@@ -31,13 +32,17 @@ const labelForDuration = (duration: FilterState["duration"]): string => {
   }
 };
 
-function Filters({ filters, onChange }: FiltersProps) {
-  const handleSelect = <K extends keyof FilterState>(key: K, value: FilterState[K]) => {
+function Filters({ filters, onChange, projects }: FiltersProps) {
+  const handleSelect = <K extends keyof FilterState>(
+    key: K,
+    value: FilterState[K]
+  ) => {
     onChange({ ...filters, [key]: value });
   };
 
   const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = event.target;
+
     if (name === "difficulty") {
       handleSelect("difficulty", value as FilterState["difficulty"]);
     }
@@ -50,34 +55,41 @@ function Filters({ filters, onChange }: FiltersProps) {
   };
 
   const handleReset = () => {
-    onChange({ stack: "All", difficulty: "all", duration: "all", sort: "recent" });
+    onChange({
+      stack: "All",
+      difficulty: "all",
+      duration: "all",
+      sort: "recent",
+    });
+  };
+
+  const countByStack = (stack: Skill | "All") => {
+    if (stack === "All") return projects.length;
+    return projects.filter((p) => p.skills.includes(stack)).length;
   };
 
   return (
     <section className="filters">
       <div className="filters__header">
-        <div>
-          <h2 className="mgb6">Projects</h2>
-          <p className="filters__description">
-            스택 · 난이도 · 기간 필터를 적용하면 URL 쿼리로 상태가 동기화됩니다.
-          </p>
-        </div>
+        <h2>Projects</h2>
         <button className="filters__reset" type="button" onClick={handleReset}>
           초기화
         </button>
       </div>
 
       <div className="filters__group">
-        <span className="filters__label">스택</span>
+        <span className="filters__label">Stack</span>
         <div className="filters__chips">
           {STACK_OPTIONS.map((stack) => (
             <button
               key={stack}
               type="button"
-              className={`skill-chip ${filters.stack === stack ? "is-active" : ""}`}
+              className={`skill-chip ${
+                filters.stack === stack ? "is-active" : ""
+              }`}
               onClick={() => handleSelect("stack", stack)}
             >
-              {stack}
+              {stack}({countByStack(stack)})
             </button>
           ))}
         </div>
@@ -123,7 +135,12 @@ function Filters({ filters, onChange }: FiltersProps) {
         <label className="filters__label" htmlFor="sort">
           정렬
         </label>
-        <select id="sort" name="sort" value={filters.sort} onChange={handleSelectChange}>
+        <select
+          id="sort"
+          name="sort"
+          value={filters.sort}
+          onChange={handleSelectChange}
+        >
           <option value="recent">최근 시작일</option>
           <option value="duration">소요 기간</option>
         </select>

@@ -17,7 +17,8 @@ const durationCategory = (weeks: number): DurationCategory => {
 const buildQueryString = (params: ProjectQueryParams): string => {
   const searchParams = new URLSearchParams();
 
-  if (params.stack && params.stack !== "All") searchParams.set("stack", params.stack);
+  if (params.stack && params.stack !== "All")
+    searchParams.set("stack", params.stack);
   if (params.difficulty && params.difficulty !== "all") {
     searchParams.set("difficulty", params.difficulty);
   }
@@ -29,31 +30,42 @@ const buildQueryString = (params: ProjectQueryParams): string => {
   return searchParams.toString();
 };
 
-const matchesFilters = (project: Project, params: ProjectQueryParams): boolean => {
+const matchesFilters = (
+  project: Project,
+  params: ProjectQueryParams
+): boolean => {
   const { stack, difficulty, duration } = params;
 
   const matchesStack =
-    !stack || stack === "All" || project.skills.some((skill) => skill === stack);
+    !stack ||
+    stack === "All" ||
+    project.skills.some((skill) => skill === stack);
   const matchesDifficulty =
     !difficulty || difficulty === "all" || project.difficulty === difficulty;
   const matchesDuration =
-    !duration || duration === "all" || durationCategory(project.durationWeeks) === duration;
+    !duration ||
+    duration === "all" ||
+    durationCategory(project.durationWeeks) === duration;
 
   return matchesStack && matchesDifficulty && matchesDuration;
 };
 
-const sortProjects = (projects: Project[], sort?: ProjectQueryParams["sort"]): Project[] => {
+const sortProjects = (
+  projects: Project[],
+  sort?: ProjectQueryParams["sort"]
+): Project[] => {
   if (sort === "duration") {
     return [...projects].sort((a, b) => a.durationWeeks - b.durationWeeks);
   }
 
   return [...projects].sort(
-    (a, b) => new Date(b.period.start).getTime() - new Date(a.period.start).getTime(),
+    (a, b) =>
+      new Date(b.period.start).getTime() - new Date(a.period.start).getTime()
   );
 };
 
 export const fetchProjects = async (
-  params: ProjectQueryParams = {},
+  params: ProjectQueryParams = {}
 ): Promise<Project[]> => {
   const queryString = buildQueryString(params);
 
@@ -61,7 +73,7 @@ export const fetchProjects = async (
     return responseCache.get(queryString)!;
   }
 
-  const url = queryString ? `${ENDPOINT}?${queryString}` : ENDPOINT;
+  const url = `${import.meta.env.BASE_URL}projects.json`;
   const response = await fetch(url);
 
   if (!response.ok) {
@@ -71,7 +83,7 @@ export const fetchProjects = async (
   const payload: Project[] = await response.json();
   const filtered = sortProjects(
     payload.filter((project) => matchesFilters(project, params)),
-    params.sort,
+    params.sort
   );
 
   responseCache.set(queryString, filtered);
@@ -80,7 +92,7 @@ export const fetchProjects = async (
 
 export const fetchProjectDetail = async (
   id: number,
-  params: ProjectQueryParams = {},
+  params: ProjectQueryParams = {}
 ): Promise<Project> => {
   // Prefer cached list results to avoid duplicate network calls when the list has already been fetched.
   const queryString = buildQueryString(params);
@@ -106,19 +118,26 @@ export const STACK_OPTIONS: Skill[] = [
   "React",
   "TypeScript",
   "Next.js",
-  "Zustand",
-  "RestAPI",
-  "React Native",
-  "Lighthouse",
+  "React API",
   "Vite",
-  "GraphQL",
+  "PhpMySql",
+  "Php",
+  "Html",
+  "Css",
+  "JavaScript",
+  "Jquery",
 ];
 
 export const DIFFICULTY_OPTIONS: ProjectQueryParams["difficulty"][] = [
   "all",
-  "beginner",
-  "intermediate",
-  "advanced",
+  "초급",
+  "중급",
+  "고급",
 ];
 
-export const DURATION_OPTIONS: ProjectQueryParams["duration"][] = ["all", "short", "medium", "long"];
+export const DURATION_OPTIONS: ProjectQueryParams["duration"][] = [
+  "all",
+  "short",
+  "medium",
+  "long",
+];
