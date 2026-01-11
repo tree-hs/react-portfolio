@@ -12,22 +12,22 @@
   },
   {
     "id": 2,
-    "title": "Sound Book",
+    "title": "시각 장애인 오디오북",
     "skills": ["Html", "Css", "JavaScript", "Jquery"],
-    "description": "장애인 도서관",
+    "description": "문화체육관광부 - 장애인 도서관",
     "difficulty": "중급",
     "period": { "start": "2022-10-01", "end": "2022-10-31" },
     "repository": "https://github.com/tree-hs/react-portfolio",
     "demoUrl": "",
-    "teamSize": 1
+    "teamSize": 2
   },
   {
     "id": 3,
     "title": "회원관리 게시판 (비공개)",
     "skills": ["Php", "PhpMySql", "Html", "Css", "JavaScript"],
     "description": "php Data Controller",
-    "difficulty": "초급",
-    "period": { "start": "2024-02-01", "end": "2024-04-30" },
+    "difficulty": "중급",
+    "period": { "start": "2021-03", "end": "2022-04" },
     "repository": "https://github.com/tree-hs/data-select-php",
     "demoUrl": "",
     "teamSize": 1
@@ -37,10 +37,53 @@
     "title": "LG CNS 이벤트 페이지 퍼블",
     "skills": ["Html", "Css", "JavaScript", "git"],
     "description": "LG CNS 이벤트 페이지 퍼블",
+    "difficulty": "중급",
+    "period": { "start": "2022-05", "end": "2022-09" },
+    "repository": "",
+    "demoUrl": "https://www.lge.co.kr/benefits",
+    "teamSize": 6
+  },
+  {
+    "id": 5,
+    "title": "IBK연금보험 이미지시스템",
+    "skills": ["Html", "Css", "JavaScript", "jquery", "photoshop"],
+    "description": "IBK연금보험 이미지시스템 퍼블리싱 + 디자인",
     "difficulty": "초급",
-    "period": { "start": "2024-02-01", "end": "2024-04-30" },
-    "repository": "https://github.com/tree-hs/data-select-php",
+    "period": { "start": "2022-10", "end": "2022-10" },
+    "repository": "",
+    "demoUrl": "",
+    "teamSize": 4
+  },
+  {
+    "id": 6,
+    "title": "KT 온누리상품권",
+    "skills": ["Html", "Css", "JavaScript", "jquery", "figma"],
+    "description": "KT 온누리상품권 퍼블",
+    "difficulty": "중급",
+    "period": { "start": "2022-10", "end": "2022-12" },
+    "repository": "",
     "demoUrl": "",
     "teamSize": 1
+  },
+  {
+    "id": 7,
+    "title": "B2B 시스템 운영 및 개발",
+    "skills": [
+      "Html",
+      "Css",
+      "JavaScript",
+      "jquery",
+      "figma",
+      "react",
+      "tailwind",
+      "gitlab",
+      "aws"
+    ],
+    "description": "B2B 폐쇄몰, B2B 거래 시스템 CRM, 기업 회원관리 시스템 개발",
+    "difficulty": "중급",
+    "period": { "start": "2022-11", "end": "2025-11" },
+    "repository": "",
+    "demoUrl": "",
+    "teamSize": 6
   }
 ]
