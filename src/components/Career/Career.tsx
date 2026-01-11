@@ -51,28 +51,31 @@ export default function Career() {
 
   return (
     <section className="filters">
-      <div className="filters__row">
-        <label className="filters__label" htmlFor="period">
-          기간
-        </label>
-        <select
-          name="period"
-          id="period"
-          value={selectedYear}
-          onChange={(e) => {
-            const v = e.target.value;
-            setSelectedYear(v === "all" ? "all" : Number(v));
-          }}
-        >
-          <option value="all">전체</option>
+      <div className="flx flx-btw flx-vct mgb12">
+        <h2>경력</h2>
+        <div className="flx flx-vct">
+          <label className="filters__label" htmlFor="period">
+            기간
+          </label>
+          <select
+            name="period"
+            id="period"
+            value={selectedYear}
+            onChange={(e) => {
+              const v = e.target.value;
+              setSelectedYear(v === "all" ? "all" : Number(v));
+            }}
+          >
+            <option value="all">전체</option>
 
-          {/* ✅ 여기 연도 띄워야됨 */}
-          {yearOptions.map((y) => (
-            <option key={y} value={y}>
-              {y}
-            </option>
-          ))}
-        </select>
+            {/* ✅ 여기 연도 띄워야됨 */}
+            {yearOptions.map((y) => (
+              <option key={y} value={y}>
+                {y}
+              </option>
+            ))}
+          </select>
+        </div>
       </div>
       <div className="grid grid--1-2 agp10">
         {companyList.map((c) => (

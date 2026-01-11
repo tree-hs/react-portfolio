@@ -50,13 +50,23 @@ function ProjectDetail({ projectId, filters }: ProjectDetailProps) {
       <div className="project-detail">
         <div className="project-detail__header">
           <h3>프로젝트 상세</h3>
-          <button type="button" onClick={handleClose} className="project-detail__close">
+          <button
+            type="button"
+            onClick={handleClose}
+            className="project-detail__close"
+          >
             닫기
           </button>
         </div>
 
-        {loading && <p className="project-detail__state">세부 정보를 불러오는 중...</p>}
-        {error && <p className="project-detail__state project-detail__state--error">{error}</p>}
+        {loading && (
+          <p className="project-detail__state">세부 정보를 불러오는 중...</p>
+        )}
+        {error && (
+          <p className="project-detail__state project-detail__state--error">
+            {error}
+          </p>
+        )}
 
         {project && !loading && !error ? (
           <>
@@ -70,7 +80,7 @@ function ProjectDetail({ projectId, filters }: ProjectDetailProps) {
               <div>
                 <dt>기간</dt>
                 <dd>
-                  {project.period.start} ~ {project.period.end ?? "진행중"} ({project.durationWeeks}주)
+                  {project.period.start} ~ {project.period.end ?? "진행중"}
                 </dd>
               </div>
               <div>
@@ -88,18 +98,23 @@ function ProjectDetail({ projectId, filters }: ProjectDetailProps) {
             </dl>
             <div className="project-detail__links">
               {project.repository ? (
-                <a href={project.repository} target="_blank" rel="noreferrer">
+                <a
+                  href={project.repository}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   Repository
                 </a>
               ) : null}
               {project.demoUrl ? (
-                <a href={project.demoUrl} target="_blank" rel="noreferrer">
+                <a
+                  href={project.demoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   Demo
                 </a>
               ) : null}
-              <p className="project-detail__hint">
-                목록 요청 결과를 캐시한 뒤 세부 정보를 우선 조회하여 API 재호출을 최소화합니다.
-              </p>
             </div>
           </>
         ) : null}

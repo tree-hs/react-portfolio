@@ -17,13 +17,14 @@ function ProjectCard({ project, isActive }: ProjectCardProps) {
   const location = useLocation();
 
   return (
-    <article className={`project-card ${isActive ? "project-card--active" : ""}`}>
+    <article
+      className={`project-card ${isActive ? "project-card--active" : ""}`}
+    >
       <div className="project-card__header">
         <div>
           <p className="project-card__label">{project.difficulty}</p>
           <h3>{project.title}</h3>
         </div>
-        <span className="project-card__duration">{project.durationWeeks}주</span>
       </div>
 
       <p className="project-card__description">{project.description}</p>
@@ -43,16 +44,22 @@ function ProjectCard({ project, isActive }: ProjectCardProps) {
 
       <div className="project-card__links">
         {project.repository ? (
-          <a href={project.repository} target="_blank" rel="noreferrer">
+          <a
+            href={project.repository}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             Repository
           </a>
         ) : null}
         {project.demoUrl ? (
-          <a href={project.demoUrl} target="_blank" rel="noreferrer">
+          <a href={project.demoUrl} target="_blank" rel="noopener noreferrer">
             Demo
           </a>
         ) : null}
-        <Link to={{ pathname: `/projects/${project.id}`, search: location.search }}>
+        <Link
+          to={{ pathname: `/projects/${project.id}`, search: location.search }}
+        >
           상세 보기
         </Link>
       </div>

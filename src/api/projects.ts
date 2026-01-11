@@ -42,10 +42,7 @@ const matchesFilters = (
     project.skills.some((skill) => skill === stack);
   const matchesDifficulty =
     !difficulty || difficulty === "all" || project.difficulty === difficulty;
-  const matchesDuration =
-    !duration ||
-    duration === "all" ||
-    durationCategory(project.durationWeeks) === duration;
+  const matchesDuration = !duration || duration === "all";
 
   return matchesStack && matchesDifficulty && matchesDuration;
 };
@@ -54,10 +51,6 @@ const sortProjects = (
   projects: Project[],
   sort?: ProjectQueryParams["sort"]
 ): Project[] => {
-  if (sort === "duration") {
-    return [...projects].sort((a, b) => a.durationWeeks - b.durationWeeks);
-  }
-
   return [...projects].sort(
     (a, b) =>
       new Date(b.period.start).getTime() - new Date(a.period.start).getTime()

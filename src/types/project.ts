@@ -30,7 +30,6 @@ export interface Project {
   description: string;
   skills: Skill[];
   difficulty: Difficulty;
-  durationWeeks: number;
   period: ProjectPeriod;
   repository?: string;
   demoUrl?: string;
