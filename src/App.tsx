@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { Route, Routes, useParams, useSearchParams } from "react-router-dom";
+import Career from "./components/Career/Career";
 import Filters, { FilterState } from "./components/Filters/Filters";
 import type { Project } from "./types/project";
 import ProjectDetail from "./components/ProjectDetail/ProjectDetail";
@@ -90,6 +91,7 @@ function ProjectPage() {
 
   return (
     <>
+      <Career />
       <Filters
         filters={filters}
         onChange={handleFilterChange}

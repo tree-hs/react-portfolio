@@ -3,17 +3,10 @@ import "./Header.scss";
 
 function Header() {
   return (
-    <header className="grid_gp10">
-      <div className="flx_btw">
+    <header className="grid agp10">
+      <div className="flx flx-btw flx-vct">
         <h1>Hs React portfolio</h1>
         <HeaderTheme />
-      </div>
-      <div>
-        <p>
-          i didn't have a lot of experience about react skill so i made this
-          page
-        </p>
-        <p>please hire me</p>
       </div>
       {/* 메뉴 등 */}
     </header>

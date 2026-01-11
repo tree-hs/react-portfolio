@@ -1,191 +1,315 @@
 @use "./palette.legacy" as pal;
+@use "sass:map";
+@use "sass:list";
 
-$cardColorList :
-  "white" var(--white),
-  "black" var(--black),
-  "blue50" var(--blue50),
-  "blue100" var(--blue100),
-  "blue200" var(--blue200),
-  "blue300" var(--blue300),
-  "blue400" var(--blue400),
-  "blue500" var(--blue500),
-  "blue600" var(--blue600),
-  "gray50" var(--gray50),
-  "gray100" var(--gray100),
-  "gray200" var(--gray200),
-  "gray300" var(--gray300),
-  "gray400" var(--gray400),
-  "gray500" var(--gray500),
-  "gray600" var(--gray600),
-  "gray700" var(--gray700),
-  "gray800" var(--gray800),
-  "gray900" var(--gray900),
-  "green400" var(--green400);
-@each $card-name, $cardColor in $cardColorList {
-  .bd-#{$card-name} { border:1px solid $cardColor }
-  .bdt-#{$card-name} { border-top:1px solid $cardColor }
-  .bdb-#{$card-name} { border-bottom:1px solid $cardColor }
-  .bdl-#{$card-name} { border-left:1px solid $cardColor }
-  .bdr-#{$card-name} { border-right:1px solid $cardColor }
-  .bdn { border:none }
-  .bdn_ipt { border:none!important; }
-}
-
-@mixin emit-color-vars($map) {
-  @each $name, $value in $map {
-    #{'--'}#{"" + $name}: #{$value}; // ← "" + $name 로 문자열화
-    .#{$name} { color: $value }
-    .bg-#{$name} { background-color: $value }
-    .bd-#{$name} { border:1px solid $value }
-    .bdt-#{$name} { border-top:1px solid $value }
-    .bdb-#{$name} { border-bottom:1px solid $value }
-    .bdl-#{$name} { border-left:1px solid $value }
-    .bdr-#{$name} { border-right:1px solid $value }
+/* =========================
+   1) THEME VARS (only vars)
+   ========================= */
+@mixin emit-css-vars($palette) {
+  @each $name, $value in $palette {
+    --#{$name}: #{$value};
   }
 }
-.bdn { border:none }
-.bdn_ipt { border:none!important; }
 
 :root {
-  @include emit-color-vars(pal.$palette-light);
+  @include emit-css-vars(pal.$palette-light);
+
   --bg: var(--gray50);
   --fg: var(--gray900);
   --muted: var(--gray500);
   --border: var(--gray200);
+
   --primary: var(--blue600);
   --primary-fg: var(--white);
+
   --success: var(--green500);
   --success-fg: var(--white);
+
   --danger: var(--red400);
   --danger-fg: var(--white);
 }
+
 @media (prefers-color-scheme: dark) {
   :root {
-    @include emit-color-vars(pal.$palette-dark);
-    --bg: var(--gray50);        /* = #0f1115 */
-    --fg: var(--gray900);       /* = #ffffff */
-    --muted: var(--gray500);    /* = #9aa4b2 */
-    --border: var(--gray200);   /* = #1f232a */
-    --primary: var(--blue500);  /* 다크에서 더 빛나는 톤 */
+    @include emit-css-vars(pal.$palette-dark);
+
+    --bg: var(--gray50);
+    --fg: var(--gray900);
+    --muted: var(--gray500);
+    --border: var(--gray200);
+
+    --primary: var(--blue500);
     --primary-fg: var(--black);
+
     --success: var(--green500);
     --success-fg: var(--black);
+
     --danger: var(--red400);
     --danger-fg: var(--black);
   }
 }
-html[data-theme="light"] { @include emit-color-vars(pal.$palette-light); }
-html[data-theme="dark"]  { @include emit-color-vars(pal.$palette-dark); }
 
-.mg-auto{ margin: auto; }
-@mixin mg-scale-while($prefix, $properties, $max: 100, $unit: px, $step: 2) {
+html[data-theme="light"] {
+  @include emit-css-vars(pal.$palette-light);
+}
+html[data-theme="dark"] {
+  @include emit-css-vars(pal.$palette-dark);
+}
+
+/* =========================
+   2) COLOR UTILITIES (once)
+   - utilities use var(--x)
+   ========================= */
+$palette-keys: map.keys(pal.$palette-light);
+
+@mixin border-utils($name) {
+  .bd-#{$name} {
+    border: 1px solid var(--#{$name});
+  }
+  .bdt-#{$name} {
+    border-top: 1px solid var(--#{$name});
+  }
+  .bdb-#{$name} {
+    border-bottom: 1px solid var(--#{$name});
+  }
+  .bdl-#{$name} {
+    border-left: 1px solid var(--#{$name});
+  }
+  .bdr-#{$name} {
+    border-right: 1px solid var(--#{$name});
+  }
+}
+
+@each $name in $palette-keys {
+  .#{$name} {
+    color: var(--#{$name});
+  }
+  .bg-#{$name} {
+    background-color: var(--#{$name});
+  }
+  @include border-utils($name);
+}
+
+/* border reset (중복 제거) */
+.bdn {
+  border: none;
+}
+.bdn_ipt {
+  border: none !important;
+}
+
+/* =========================
+   3) SPACING / GAP / FONT
+   - exact class selectors
+   ========================= */
+.mg-auto {
+  margin: auto;
+}
+
+@function _as-list($v) {
+  @return if(type-of($v) == "list", $v, ($v));
+}
+
+@mixin scale(
+  $prefix,
+  $properties,
+  $max: 100,
+  $unit: px,
+  $step: 2,
+  $include1: true
+) {
+  $props: _as-list($properties);
+
   .#{$prefix}0 {
-    @each $prop in $properties { #{$prop}: 0#{$unit}; }
+    @each $prop in $props {
+      #{$prop}: 0#{$unit};
+    }
   }
-  .#{$prefix}1 {
-    @each $prop in $properties { #{$prop}: 1#{$unit}; }
+
+  @if $include1 {
+    .#{$prefix}1 {
+      @each $prop in $props {
+        #{$prop}: 1#{$unit};
+      }
+    }
   }
+
   $n: 2;
   @while $n <= $max {
     .#{$prefix}#{$n} {
-      @each $prop in $properties { #{$prop}: #{$n}#{$unit}; }
+      @each $prop in $props {
+        #{$prop}: #{$n}#{$unit};
+      }
     }
     $n: $n + $step;
   }
 }
-@mixin gap-scale-while($prefix, $properties, $max: 100, $unit: px, $step: 2) {
-  $n: 0;
+
+/* spacing */
+@include scale("amg", margin);
+@include scale("mgt", margin-top);
+@include scale("mgb", margin-bottom);
+@include scale("mgl", margin-left);
+@include scale("mgr", margin-right);
+@include scale("mgx", margin-inline);
+@include scale("mgy", margin-block);
+
+@include scale("apd", padding);
+@include scale("pdt", padding-top);
+@include scale("pdb", padding-bottom);
+@include scale("pdl", padding-left);
+@include scale("pdr", padding-right);
+@include scale("pdx", padding-inline);
+@include scale("pdy", padding-block);
+
+/* gap */
+@include scale("agp", gap, 100, px, 2, false);
+@include scale("xgp", column-gap, 100, px, 2, false);
+@include scale("ygp", row-gap, 100, px, 2, false);
+
+/* font-size (+ line variant) */
+@mixin font-scale(
+  $prefix,
+  $property,
+  $max: 80,
+  $unit: px,
+  $step: 2,
+  $start: 10
+) {
+  .#{$prefix}0 {
+    #{$property}: 0#{$unit};
+  }
+
+  $n: $start;
   @while $n <= $max {
-    [class*="#{$prefix}#{$n}"] {
-      @each $prop in $properties { #{$prop}: #{$n}#{$unit}; }
+    .#{$prefix}#{$n} {
+      #{$property}: #{$n}#{$unit};
+    }
+    .#{$prefix}#{$n}-line {
+      #{$property}: #{$n}#{$unit};
+      line-height: 1.5em;
     }
     $n: $n + $step;
   }
 }
-// @include mg-scale-while('pd-test', margin, 80); // ~mg80
-@include mg-scale-while('mg', margin);
-@include mg-scale-while('mgt', margin-top);
-@include mg-scale-while('mgb', margin-bottom);
-@include mg-scale-while('mgl', margin-left);
-@include mg-scale-while('mgr', margin-right);
-@include mg-scale-while('mgx', margin-inline);
-@include mg-scale-while('mgy', margin-block);
-@include mg-scale-while('pd', padding);
-@include mg-scale-while('pdt', padding-top);
-@include mg-scale-while('pdb', padding-bottom);
-@include mg-scale-while('pdl', padding-left);
-@include mg-scale-while('pdr', padding-right);
-@include mg-scale-while('pdx', padding-inline);
-@include mg-scale-while('pdy', padding-block);
-@include gap-scale-while('_gp', gap);
-@include gap-scale-while('_xgp', column-gap);
-@include gap-scale-while('_ygp', row-gap);
 
-// font-size
-@mixin txt-scale-while($prefix, $property, $max: 80, $unit: px) {
-    .#{$prefix}0 { #{$property}: 0#{$unit}; }
-    $n: 10;
-    @while $n <= $max {
-        [class*="#{$prefix}#{$n}"] { 
-            #{$property}: #{$n}#{$unit}; 
-            &[class*="-line"] { line-height: 1.5em }
-        }
-        $n: $n + 2;
-    }
-}
-@include txt-scale-while('fs', font-size, 64);
+@include font-scale("fs", font-size, 64);
 
-/* font-Weight */
+/* font-weight */
 @for $i from 1 through 9 {
   $w: $i * 100;
-  .fw#{$w} { font-weight: $w; }
+  .fw#{$w} {
+    font-weight: $w;
+  }
 }
 
-.rel { position: relative }
+/* =========================
+   4) LAYOUT UTILITIES
+   ========================= */
+.rel {
+  position: relative;
+}
 
-
-/* flex & grid */
-[class*="flx"] {
+/* flex (contains 제거 버전) */
+.flx {
   display: flex;
-  &[class*="_btw"] { justify-content: space-between }
-  &[class*="_ct"] { justify-content: center }
-  &[class*="_ed"] { justify-content: flex-end }
-  &[class*='_ved']{ align-items: flex-end }
-  &[class*='_vct']{ align-items: center }
-  &[class*='_all-ct']{ justify-content: center; align-items: center }
-  &[class*='_wrap'] { flex-wrap:wrap }
+}
+.flx-btw {
+  justify-content: space-between;
+}
+.flx-ct {
+  justify-content: center;
+}
+.flx-ed {
+  justify-content: flex-end;
+}
+.flx-ved {
+  align-items: flex-end;
+}
+.flx-vct {
+  align-items: center;
+}
+.flx-all-ct {
+  justify-content: center;
+  align-items: center;
+}
+.flx-wrap {
+  flex-wrap: wrap;
 }
 
-[class*="grid"] {
-  $grid-min: 2;
-  $grid-max: 12;
+/* grid */
+.grid {
   display: grid;
-  @for $n from $grid-min through $grid-max {
-    /* n등분 */
-    [class*="_1/#{$n}"] { grid-template-columns: repeat(#{$n}, minmax(0, 1fr)); }
-    /* 2열 비율 */
-    @if $n > 2 {
-      @for $k from 2 through ($n - 1) {
-        [class*="_#{$k}/#{$n}"] { grid-template-columns: #{$k}fr #{($n - $k)}fr; }
+}
+
+$grid-min: 2;
+$grid-max: 12;
+
+@for $n from $grid-min through $grid-max {
+  .grid--1-#{$n} {
+    grid-template-columns: repeat(#{$n}, minmax(0, 1fr));
+  }
+
+  @if $n > 2 {
+    @for $k from 2 through ($n - 1) {
+      .grid--#{$k}-#{$n} {
+        grid-template-columns: #{$k}fr #{($n - $k)}fr;
       }
     }
   }
 }
 
 hr {
-  border:none;
-  border-top:1px solid var(--gray100);
-  margin:0;
-  &.line1 { border-width: 1px }
-  &.line2 { border-width: 2px }
-}
-.w-full { width:100% }
-.h-full { height:100% }
-.vh-full { height:100vh }
-.hmin-full { min-height: 100vh }
-.center { text-align: center }
-.hidden { display: none }
+  border: none;
+  border-top: 1px solid var(--gray100);
+  margin: 0;
 
-.fx1 { flex:1 }
-.fx2 { flex:2 }
-.fx3 { flex:3 }
+  &.line1 {
+    border-width: 1px;
+  }
+  &.line2 {
+    border-width: 2px;
+  }
+}
+
+.w-full {
+  width: 100%;
+}
+.h-full {
+  height: 100%;
+}
+.vh-full {
+  height: 100vh;
+}
+.hmin-full {
+  min-height: 100vh;
+}
+.center {
+  text-align: center;
+}
+.hidden {
+  display: none;
+}
+.elps {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+.elps-2 {
+  -webkit-line-clamp: 2;
+}
+.elps-3 {
+  -webkit-line-clamp: 3;
+}
+
+.fx1 {
+  flex: 1;
+}
+.fx2 {
+  flex: 2;
+}
+.fx3 {
+  flex: 3;
+}

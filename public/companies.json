@@ -1,0 +1,181 @@
+[
+  {
+    "id": 1,
+    "company": "더라이징스타",
+    "employmentType": "사원",
+    "team": "개발팀",
+    "position": "웹퍼블리셔",
+    "period": { "start": "2016.07", "end": "2016.12" },
+    "highlights": [
+      "- 스타트 업 웹에이전시 , 홈페이지, 모바일 및 앱 개발",
+      "- 찍어스 - https://apptopia.com/google-play/app/com.zzikus.app/about",
+      "- 일당go - https://play.google.com/store/apps/details?id=com.ildanggo.ildanggo"
+    ],
+    "techStack": ["Html", "css", "javascript", "jquery", "bootstrap", "ionic"]
+  },
+  {
+    "id": 2,
+    "company": "아이스캔디",
+    "employmentType": "사원",
+    "team": "웹콘텐츠팀",
+    "position": "퍼블리셔",
+    "period": { "start": "2017.06", "end": "2018.03" },
+    "highlights": [
+      "- 학교에서 사용하는 교육물 컨텐츠 aspen web tool로 제작 ( CD )",
+      "(YBM 고등과학(4과목), 천재교육 초등영어, 동아 초등영어)",
+      "Aspen 개발, CD 제작, Linux server 관리",
+      "Aspen script, Aspen tool, css, javascript"
+    ],
+    "techStack": ["Html", "Aspen", "aspenscript", "linux"]
+  },
+  {
+    "id": 3,
+    "company": "(주)바른웹",
+    "employmentType": "사원",
+    "team": "개발팀",
+    "position": "퍼블리셔",
+    "period": { "start": "2018.04", "end": "2019.04" },
+    "highlights": [
+      "- 디자인 및 소규모의 사이트 홈페이지,모바일,반응형 개발 ( 50여개 중,소기업 사이트 )",
+      "- pc,mobile,반응형,앱 사이트 디자인/퍼블리싱",
+      "- 사이트 기획/디자인/퍼블",
+      "= html, Css, javascript,jquery, php, bootstrap, gnuboard"
+    ],
+    "techStack": [
+      "Html",
+      "css",
+      "javascript",
+      "jquery",
+      "bootstrap",
+      "php",
+      "photoshop"
+    ]
+  },
+  {
+    "id": 4,
+    "company": "인사커뮤니케이션",
+    "employmentType": "사원",
+    "team": "기업부설연구소",
+    "position": "선임연구원",
+    "period": { "start": "2019.06", "end": "2020.11" },
+    "highlights": [
+      "- 병원/의료 위주의 PC·Mobile 반응형 사이트 개발(약 300개)",
+      "- 검색엔진 최적화(google, naver) 및 PC/Mobile/반응형 사이트 퍼블리싱",
+      "- 시그니아 보청기 Japen 주문제작 관리시스템 개발",
+      "- KB(국민) 인터넷뱅킹 상품 프린트 페이지 개발"
+    ],
+    "techStack": [
+      "Html",
+      "Css",
+      "JavaScript",
+      "Jquery",
+      "Php",
+      "Bootstrap",
+      "Gagabuild",
+      "SEO"
+    ]
+  },
+  {
+    "id": 5,
+    "company": "문화체육관광부",
+    "employmentType": "프리랜서",
+    "team": "",
+    "position": "웹퍼블리셔",
+    "period": { "start": "2021.07", "end": "2021.10" },
+    "highlights": [
+      "- 시각장애인을 위한 책 TTS 오디오북 페이지 개발",
+      "- Script 오디오 파일 로딩 및 제어 컨트롤 구현",
+      "- 장애인 환경 UI/UX 동작을 키보드 조작 기반으로 전환"
+    ],
+    "techStack": ["Html", "Css", "JavaScript", "VanillaJS", "Bootstrap"]
+  },
+  {
+    "id": 6,
+    "company": "엠투엑스",
+    "employmentType": "매니저",
+    "team": "개발팀",
+    "position": "개발자",
+    "period": { "start": "2021.03", "end": "2022.04" },
+    "highlights": [
+      "- 광고주-마케터 거래 중개 플랫폼 사이트 개발(제로보드)",
+      "- 자사 사이트 개발(그누보드)",
+      "- 자사 사이트 회원관리 시스템 개발(그누보드, MySQL)",
+      "- 협력사 랜딩페이지 및 홍보 사이트 개발",
+      "- Naver, Google, E-mail 인증서 로그인",
+      "- JavaScript로 상품 등록(상품이미지 입력/출력) 및 수정, 삭제, 게시글 임시저장",
+      "- 전체 레이아웃 퍼블리싱"
+    ],
+    "techStack": [
+      "Html",
+      "Css",
+      "JavaScript",
+      "VanillaJS",
+      "Jquery",
+      "Php",
+      "Bootstrap",
+      "Zeroboard",
+      "Gnuboard",
+      "MySQL"
+    ]
+  },
+  {
+    "id": 7,
+    "company": "지엠솔루션",
+    "employmentType": "사원",
+    "team": "UXD",
+    "position": "선임연구원",
+    "period": { "start": "2022.05", "end": "2022.09" },
+    "highlights": [
+      "- LG전자 한국영업본부 내부이벤트 페이지(비공개) 프로트 페이지 수정 및 유지보수 운영관리",
+      "- 주요직무: 웹표준·웹접근성"
+    ],
+    "techStack": []
+  },
+  {
+    "id": 8,
+    "company": "pacesystem",
+    "employmentType": "프리랜서",
+    "team": "",
+    "position": "웹퍼블리셔",
+    "period": { "start": "2022.10", "end": "2022.10" },
+    "highlights": ["- IBK연금보험 이미지시스템 퍼블리싱 + 디자인"],
+    "techStack": ["Html", "Css", "VanillaJS", "Photoshop"]
+  },
+  {
+    "id": 9,
+    "company": "테이스티기어 (Tastyge)",
+    "employmentType": "프리랜서",
+    "team": "",
+    "position": "웹퍼블리셔",
+    "period": { "start": "2022.10", "end": "2022.12" },
+    "highlights": ["- KT 온누리상품권 웹사이트 프론트 개발"],
+    "techStack": ["Html", "Css", "JavaScript", "Jquery", "Figma"]
+  },
+  {
+    "id": 10,
+    "company": "캐스팅엔",
+    "employmentType": "프리랜서",
+    "team": "개발팀",
+    "position": "웹퍼블리셔",
+    "period": { "start": "2022.11", "end": "2025.11" },
+    "highlights": [
+      "- 자사 서비스 플랫폼 개발 및 유지 보수 & 신규 페이지 및 사이트 제작",
+      "- 자사몰 / 자사 헤드헌팅몰 / 자사 의료관련 컨설팅·마켓·홍보 몰 개설",
+      "- CRM 관리 웹",
+      "- B2B 폐쇄몰 / 폐쇄형 SCM 관리 운영 웹",
+      "- B2B 거래 시스템 웹 사이트"
+    ],
+    "techStack": [
+      "Html",
+      "Css",
+      "JavaScript",
+      "Jquery",
+      "React",
+      "Json",
+      "Tailwind",
+      "Figma",
+      "Java",
+      "Gitlab"
+    ]
+  }
+]

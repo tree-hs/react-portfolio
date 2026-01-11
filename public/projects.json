@@ -34,5 +34,17 @@
     "repository": "https://github.com/tree-hs/data-select-php",
     "demoUrl": "",
     "teamSize": 1
+  },
+  {
+    "id": 4,
+    "title": "회원관리 게시판 (비공개)",
+    "skills": ["Php", "PhpMySql", "Html", "Css", "JavaScript"],
+    "description": "php Data Controller",
+    "difficulty": "초급",
+    "durationWeeks": 12,
+    "period": { "start": "2024-02-01", "end": "2024-04-30" },
+    "repository": "https://github.com/tree-hs/data-select-php",
+    "demoUrl": "",
+    "teamSize": 1
   }
 ]
