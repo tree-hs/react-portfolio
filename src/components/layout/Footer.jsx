@@ -1,7 +1,16 @@
 function Footer() {
+  const currentYear = new Date().getFullYear();
+  
   return (
-    <footer>
-      <p>© 2025 My Site</p>
+    <footer className="footer">
+      <div className="footer__content">
+        <p className="footer__text">
+          Designed & Built by HS
+        </p>
+        <p className="footer__copyright">
+          © {currentYear} All rights reserved.
+        </p>
+      </div>
     </footer>
   );
 }

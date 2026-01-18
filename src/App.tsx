@@ -46,6 +46,37 @@ const parseFilters = (searchParams: URLSearchParams): FilterState => {
   };
 };
 
+function AboutSection() {
+  return (
+    <section id="about" className="about-section">
+      <h2>
+        <span className="section-number">01.</span>
+        About Me
+      </h2>
+      <div className="about__content">
+        <div className="about__text">
+          <p>
+            이것 저것 해보긴 했는데 퍼블리셔 포지션으로만 경력을 쌓아서
+            퍼블리싱 외 대다수 stack은 초급이라 생각해서 초급이라 했습니다.
+          </p>
+          <p>
+            현재는 React와 TypeScript를 활용한 프론트엔드 개발에 집중하고 있으며,
+            사용자 경험을 개선하고 접근성을 고려한 웹 애플리케이션을 만드는 것을 좋아합니다.
+          </p>
+          <p>주로 사용하는 기술 스택:</p>
+          <ul className="about__skills">
+            <li>JavaScript (ES6+)</li>
+            <li>TypeScript</li>
+            <li>React</li>
+            <li>HTML & CSS/SCSS</li>
+            <li>Vite</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function ProjectPage() {
   const { projectId } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -91,13 +122,14 @@ function ProjectPage() {
 
   return (
     <>
+      <AboutSection />
       <Career />
       <Filters
         filters={filters}
         onChange={handleFilterChange}
         projects={projects}
       />
-      {loadError && <p>Failed to fetch: {loadError}</p>}
+      {loadError && <p className="error-message">Failed to fetch: {loadError}</p>}
       <ProjectList filters={filters} activeProjectId={activeId} />
       <ProjectDetail projectId={activeId} filters={filters} />
     </>
@@ -108,7 +140,7 @@ function App() {
   return (
     <>
       <Header />
-      <main className="main mgy40">
+      <main className="main">
         <Routes>
           <Route path="/" element={<ProjectPage />} />
           <Route path="/projects/:projectId" element={<ProjectPage />} />

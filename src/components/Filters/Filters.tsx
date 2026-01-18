@@ -69,13 +69,18 @@ function Filters({ filters, onChange, projects }: FiltersProps) {
   };
 
   return (
-    <section className="filters">
-      <div className="filters__header">
-        <h2>Projects</h2>
-        <button className="filters__reset" type="button" onClick={handleReset}>
-          초기화
-        </button>
-      </div>
+    <section id="projects" className="projects-section">
+      <h2>
+        <span className="section-number">03.</span>
+        Some Things I've Built
+      </h2>
+      
+      <div className="filters">
+        <div className="filters__header">
+          <button className="filters__reset" type="button" onClick={handleReset}>
+            Reset
+          </button>
+        </div>
 
       <div className="filters__group">
         <span className="filters__label">Stack</span>
@@ -144,6 +149,7 @@ function Filters({ filters, onChange, projects }: FiltersProps) {
           <option value="recent">최근 시작일</option>
           <option value="duration">소요 기간</option>
         </select>
+      </div>
       </div>
     </section>
   );

@@ -49,18 +49,19 @@ function ProjectDetail({ projectId, filters }: ProjectDetailProps) {
     <div className="project-detail__overlay" role="dialog" aria-modal="true">
       <div className="project-detail">
         <div className="project-detail__header">
-          <h3>프로젝트 상세</h3>
+          <h3>Project Details</h3>
           <button
             type="button"
             onClick={handleClose}
             className="project-detail__close"
+            aria-label="Close"
           >
-            닫기
+            ×
           </button>
         </div>
 
         {loading && (
-          <p className="project-detail__state">세부 정보를 불러오는 중...</p>
+          <p className="project-detail__state">Loading project details...</p>
         )}
         {error && (
           <p className="project-detail__state project-detail__state--error">

@@ -53,18 +53,10 @@ function ProjectList({ filters, activeProjectId }: ProjectListProps) {
   }, [filters]);
 
   return (
-    <section className="project-list__section">
-      <div className="project-list__header">
-        <div>
-          <p className="project-list__label">{listTitle}</p>
-          <h2 className="mgb6">프로젝트 목록</h2>
-        </div>
-        <span className="project-list__count">{projects.length}개</span>
-      </div>
-
-      {loading && <div className="project-list__state">프로젝트를 불러오는 중...</div>}
+    <div className="project-list__section">
+      {loading && <div className="project-list__state">Loading projects...</div>}
       {error && <div className="project-list__state project-list__state--error">{error}</div>}
-      {emptyState && <div className="project-list__state">조건에 맞는 프로젝트가 없습니다.</div>}
+      {emptyState && <div className="project-list__state">No projects found matching your criteria.</div>}
 
       {!loading && !error && projects.length > 0 ? (
         <div className="project-list">
@@ -77,7 +69,7 @@ function ProjectList({ filters, activeProjectId }: ProjectListProps) {
           ))}
         </div>
       ) : null}
-    </section>
+    </div>
   );
 }
 

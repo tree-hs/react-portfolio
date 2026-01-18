@@ -1,16 +1,23 @@
+// Brittany Chiang inspired color palette
 $palette-light: (
-  "white": #ffffff, "black": #000000, "blue50": #F7F8FC, "blue100": #F9F9FC, "blue200": #F4FAFF, 
-  "blue300": #D9DFEB, "blue400": #D4DBE8, "blue500": #0E89E8, "blue600": #007AFF, "blue700": #023B69, 
-  "gray50": #f8f8f8, "gray100": #F2F2F2, "gray200": #E8E8E8, "gray300": #D9D9D9, "gray400": #C8C8C8,
-  "gray500": #999999, "gray600": #666666, "gray700": #333333, "gray800": #202020, "gray900": #101010,
-  "green400": #50B99B, "green500": #32AB8C, "red": #F05046, "red50": #FFE6EB, "red100": #FAC3C3,
-  "red200": #F59191, "red300": #F05046, "red400": #F00505, "red500": #C3050A
+  "white": #ffffff, "black": #000000, 
+  "blue50": #f0f4f8, "blue100": #d6e4f0, "blue200": #b8d4e8, 
+  "blue300": #8bb3d6, "blue400": #5d9fd4, "blue500": #4a90e2, "blue600": #357abd, "blue700": #2a5f8f, 
+  "gray50": #fafafa, "gray100": #f5f5f5, "gray200": #e5e5e5, "gray300": #d4d4d4, "gray400": #a3a3a3,
+  "gray500": #737373, "gray600": #525252, "gray700": #404040, "gray800": #262626, "gray900": #171717,
+  "green400": #64ffda, "green500": #57d4b3, "green600": #4ec9b0,
+  "navy50": #f8f9fa, "navy100": #e9ecef, "navy200": #dee2e6, "navy300": #ced4da, "navy400": #adb5bd,
+  "navy500": #8892b0, "navy600": #495057, "navy700": #343a40, "navy800": #212529, "navy900": #0a192f,
+  "red": #ff6b6b, "red50": #ffe6eb, "red100": #fac3c3, "red200": #f59191, "red300": #f05046, "red400": #f00505, "red500": #c3050a
 );
 $palette-dark: (
-  "white": #0b0d10, "black": #ffffff, "blue50":  #0f172a, "blue100": #0b223a, "blue200": #102a44,
-  "blue300": #1e3a5a, "blue400": #244b74, "blue500": #3ea0ff, "blue600": #1e90ff, "blue700": #69b6ff,
-  "gray50":  #0f1115, "gray100": #16181d, "gray200": #1f232a, "gray300": #2b3038, "gray400": #3b4252,
-  "gray500": #9aa4b2, "gray600": #c2c8d0, "gray700": #e2e8f0, "gray800": #f1f5f9, "gray900": #ffffff,
-  "green400": #34daba, "green500": #2ac3a2, "red": #ff6b6b, "red50": #2a0f12, "red100": #3a1519,
-  "red200": #5a1f26, "red300":  #a23a44, "red400":  #ff5a60, "red500":  #ff7a7f
+  "white": #0a192f, "black": #ccd6f6, 
+  "blue50": #0f172a, "blue100": #1e3a5a, "blue200": #1e40af, 
+  "blue300": #3b82f6, "blue400": #60a5fa, "blue500": #64d9ff, "blue600": #3ea0ff, "blue700": #1e90ff, 
+  "gray50": #0a192f, "gray100": #112240, "gray200": #1a2332, "gray300": #233554, "gray400": #495670,
+  "gray500": #8892b0, "gray600": #a8b2d1, "gray700": #ccd6f6, "gray800": #e6f1ff, "gray900": #ffffff,
+  "green400": #64ffda, "green500": #57d4b3, "green600": #4ec9b0,
+  "navy50": #0a192f, "navy100": #112240, "navy200": #1a2332, "navy300": #233554, "navy400": #495670,
+  "navy500": #8892b0, "navy600": #a8b2d1, "navy700": #ccd6f6, "navy800": #e6f1ff, "navy900": #ffffff,
+  "red": #ff6b6b, "red50": #2a0f12, "red100": #3a1519, "red200": #5a1f26, "red300": #a23a44, "red400": #ff5a60, "red500": #ff7a7f
 );

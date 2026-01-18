@@ -50,14 +50,16 @@ export default function Career() {
   }, [selectedYear]);
 
   return (
-    <section className="filters">
-      <div className="flx flx-btw flx-vct mgb12">
-        <h2>경력</h2>
-        <div className="flx flx-vct">
-          <label className="filters__label" htmlFor="period">
-            기간
-          </label>
+    <section id="experience" className="experience-section">
+      <h2>
+        <span className="section-number">02.</span>
+        Where I've Worked
+      </h2>
+      
+      <div className="experience__container">
+        <div className="experience__tabs">
           <select
+            className="experience__select"
             name="period"
             id="period"
             value={selectedYear}
@@ -66,9 +68,7 @@ export default function Career() {
               setSelectedYear(v === "all" ? "all" : Number(v));
             }}
           >
-            <option value="all">전체</option>
-
-            {/* ✅ 여기 연도 띄워야됨 */}
+            <option value="all">All</option>
             {yearOptions.map((y) => (
               <option key={y} value={y}>
                 {y}
@@ -76,34 +76,31 @@ export default function Career() {
             ))}
           </select>
         </div>
-      </div>
-      <div className="grid grid--1-2 agp10">
-        {companyList.map((c) => (
-          <div className="project-card" key={c.id}>
-            <div className="flx flx-btw">
-              <div className="flx flx-vct xgp8">
-                <div className="fs20">
-                  <strong>{c.company}</strong>
-                </div>
-                <div className="fs12">
-                  {c.period.start} ~ {c.period.end}
-                </div>
+
+        <div className="experience__content">
+          {companyList.map((c, idx) => (
+            <div key={c.id} className="experience__item">
+              <div className="experience__header">
+                <h3 className="experience__title">
+                  <span>{c.position}</span>
+                  <span className="experience__company"> @ {c.company}</span>
+                </h3>
+                <p className="experience__period">
+                  {c.period.start} — {c.period.end}
+                </p>
               </div>
-              <div className="flx flx_vct xgp8">
-                <div className="fs12">{c.team}</div>
-                <div className="fs12">{c.position}</div>
-              </div>
-            </div>
-            <div className="elps">
-              <div className="fs12 flx xgp4">
+              <p className="experience__team">{c.team}</p>
+              <p className="experience__description">{c.highlights}</p>
+              <div className="experience__tech">
                 {c.techStack.map((t) => (
-                  <span key={`${c.id}-${t}`}>{t}</span>
+                  <span key={`${c.id}-${t}`} className="experience__tech-item">
+                    {t}
+                  </span>
                 ))}
               </div>
             </div>
-            <div className="fs12 elps elps-2">{c.highlights}</div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
   );

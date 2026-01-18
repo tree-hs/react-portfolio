@@ -1,21 +1,74 @@
+import { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import HeaderTheme from "./HeaderTheme";
 import "./Header.scss";
 
+const navItems = [
+  { name: "About", path: "#about" },
+  { name: "Experience", path: "#experience" },
+  { name: "Projects", path: "#projects" },
+];
+
 function Header() {
+  const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const scrollToSection = (path) => {
+    const hash = path.split("#")[1];
+    if (hash) {
+      const element = document.getElementById(hash);
+      if (element) {
+        const headerOffset = 80;
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+        
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth"
+        });
+      }
+    }
+  };
+
   return (
-    <header className="grid agp10">
-      <div className="flx flx-btw flx-vct">
-        <div>
-          <h1>Hs React portfolio</h1>
-          <p className="fs12">
-            이것 저것 해보긴 했는데 퍼블리셔 포지션으로만 경력을 쌓아서
-            <br />
-            퍼블리싱 외 대다수 stack은 초급이라 생각해서 초급이라 했습니다.
-          </p>
+    <header className={`header ${scrolled ? "header--scrolled" : ""}`}>
+      <nav className="header__nav">
+        <div className="header__logo">
+          <Link to="/" className="header__logo-link">
+            <span className="header__logo-text">HS</span>
+          </Link>
         </div>
-        <HeaderTheme />
-      </div>
-      {/* 메뉴 등 */}
+        
+        <ul className="header__menu">
+          {navItems.map((item, idx) => (
+            <li key={idx} className="header__menu-item">
+              <a
+                href={item.path}
+                className="header__menu-link"
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection(item.path);
+                }}
+              >
+                <span className="header__menu-number">0{idx + 1}.</span>
+                {item.name}
+              </a>
+            </li>
+          ))}
+        </ul>
+
+        <div className="header__actions">
+          <HeaderTheme />
+        </div>
+      </nav>
     </header>
   );
 }
