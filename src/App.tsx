@@ -133,7 +133,9 @@ function ProjectPage() {
     <>
       <AboutSection />
       <section id="projects" className="projects-section">
-        <Career />
+        <Career />        
+      </section>
+      <section id="stack" className="filters-section">
         <Filters
           filters={filters}
           onChange={handleFilterChange}

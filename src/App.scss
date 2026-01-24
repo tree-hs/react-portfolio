@@ -263,12 +263,8 @@ button {
 
 .main {
   display: grid;
-  gap: 120px;
   padding: 0;
   margin-top: 0;
-  @media (max-width: 768px) {
-    gap: 0px;
-  }
 }
 .filters {
   background: transparent;
@@ -320,7 +316,6 @@ section {
 
 // Experience Section Styles
 .experience-section {
-  margin-bottom: 100px;
   @media (max-width: 768px) {
     margin-bottom: 80px;
   } 
@@ -329,7 +324,7 @@ section {
 .experience__container {
   display: flex;
   gap: 50px;
-  
+  margin-bottom: 120px;
   @media (max-width: 768px) {
     flex-direction: column;
     gap: 30px;

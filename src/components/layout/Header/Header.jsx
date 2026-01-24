@@ -6,7 +6,7 @@ import "./Header.scss";
 const navItems = [
   { name: "About", path: "#about" },
   { name: "Work", path: "#projects" },
-  { name: "Contact", path: "#contact" },
+  { name: "Stack", path: "#stack" },
 ];
 
 function Header() {
