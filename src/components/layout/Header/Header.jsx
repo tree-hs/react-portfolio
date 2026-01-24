@@ -5,8 +5,8 @@ import "./Header.scss";
 
 const navItems = [
   { name: "About", path: "#about" },
-  { name: "Experience", path: "#experience" },
-  { name: "Projects", path: "#projects" },
+  { name: "Work", path: "#projects" },
+  { name: "Contact", path: "#contact" },
 ];
 
 function Header() {

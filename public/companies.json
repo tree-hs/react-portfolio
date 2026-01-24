@@ -18,7 +18,7 @@
     "company": "아이스캔디",
     "employmentType": "사원",
     "team": "웹콘텐츠팀",
-    "position": "퍼블리셔",
+    "position": "아스펜 개발자",
     "period": { "start": "2017.06", "end": "2018.03" },
     "highlights": [
       "- 학교에서 사용하는 교육물 컨텐츠 aspen web tool로 제작 ( CD )",
@@ -54,9 +54,9 @@
   {
     "id": 4,
     "company": "인사커뮤니케이션",
-    "employmentType": "사원",
+    "employmentType": "선임연구원",
     "team": "기업부설연구소",
-    "position": "선임연구원",
+    "position": "퍼블리셔",
     "period": { "start": "2019.06", "end": "2020.11" },
     "highlights": [
       "- 병원/의료 위주의 PC·Mobile 반응형 사이트 개발(약 300개)",
@@ -121,9 +121,9 @@
   {
     "id": 7,
     "company": "지엠솔루션",
-    "employmentType": "사원",
+    "employmentType": "선임연구원",
     "team": "UXD",
-    "position": "선임연구원",
+    "position": "퍼블리셔",
     "period": { "start": "2022.05", "end": "2022.09" },
     "highlights": [
       "- LG전자 한국영업본부 내부이벤트 페이지(비공개) 프로트 페이지 수정 및 유지보수 운영관리",
@@ -136,7 +136,7 @@
     "company": "pacesystem",
     "employmentType": "프리랜서",
     "team": "",
-    "position": "웹퍼블리셔",
+    "position": "퍼블리셔",
     "period": { "start": "2022.10", "end": "2022.10" },
     "highlights": ["- IBK연금보험 이미지시스템 퍼블리싱 + 디자인"],
     "techStack": ["Html", "Css", "VanillaJS", "Photoshop"]
@@ -146,7 +146,7 @@
     "company": "Tastygear",
     "employmentType": "프리랜서",
     "team": "",
-    "position": "웹퍼블리셔",
+    "position": "퍼블리셔",
     "period": { "start": "2022.10", "end": "2022.12" },
     "highlights": ["- KT 온누리상품권 웹사이트 프론트 개발"],
     "techStack": ["Html", "Css", "JavaScript", "Jquery", "Figma"]
@@ -156,7 +156,7 @@
     "company": "캐스팅엔",
     "employmentType": "프리랜서",
     "team": "개발팀",
-    "position": "웹퍼블리셔",
+    "position": "퍼블리셔",
     "period": { "start": "2022.11", "end": "2025.11" },
     "highlights": [
       "- 자사 서비스 플랫폼 개발 및 유지 보수 & 신규 페이지 및 사이트 제작",
@@ -176,6 +176,27 @@
       "Figma",
       "Java",
       "Gitlab"
+    ]
+  },
+  {
+    "id": 11,
+    "company": "지오이스트",
+    "employmentType": "프리랜서",
+    "team": "개발팀",
+    "position": "퍼블리셔",
+    "period": { "start": "2026.01", "end": "2026.03" },
+    "highlights": [
+      "- 자사 서비스모델 b2b 플랫폼 퍼블리싱"
+    ],
+    "techStack": [
+      "react",
+      "tailwind",
+      "figma",
+      "javascript",
+      "typescript",
+      "html",
+      "css",
+      "git"
     ]
   }
 ]

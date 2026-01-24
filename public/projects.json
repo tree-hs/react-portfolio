@@ -1,9 +1,9 @@
 [
   {
     "id": 1,
-    "title": "React 포트폴리오 깃",
+    "title": "React 현재 git",
     "skills": ["React", "React API", "TypeScript"],
-    "description": "React 실무경력 많지 않아서 따로 제출용으로 만든 포트폴리오",
+    "description": "[포트폴리오]",
     "difficulty": "초급",
     "period": { "start": "2025-12-21", "end": "2025-12-26" },
     "repository": "https://github.com/example/react-portfolio",
@@ -85,5 +85,21 @@
     "repository": "",
     "demoUrl": "",
     "teamSize": 6
+  },
+  {
+    "id": 8,
+    "title": "LLM 국내 주식 TOP50 종목",
+    "skills": [
+      "react",
+      "Css",
+      "JavaScript",
+      "cursorAI"
+    ],
+    "description": "[포트폴리오]",
+    "difficulty": "초급",
+    "period": { "start": "2026-01", "end": "2026-01" },
+    "repository": "https://github.com/tree-hs/korea_exchage_stockTop50",
+    "demoUrl": "https://tree-hs.github.io/korea_exchage_stockTop50/",
+    "teamSize": 1
   }
 ]

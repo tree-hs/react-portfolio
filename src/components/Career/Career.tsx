@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useRef } from "react";
 import { fetchCompanies } from "../../api/companys";
 import type { CompanyCareer } from "../../types/companys";
 
@@ -11,6 +11,11 @@ export default function Career() {
 
   // ✅ 연도 옵션 만들기 위해 "전체 데이터"도 한번 보관 (옵션 생성용)
   const [allCompanies, setAllCompanies] = useState<CompanyCareer[]>([]);
+  
+  // ✅ sticky 제어를 위한 refs
+  const tabsRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   // 1) 최초 1회: 전체 데이터 가져와서 옵션 생성 기반 확보
   useEffect(() => {
@@ -49,15 +54,49 @@ export default function Career() {
     fetchCompanies(params).then(setCompanyList).catch(console.error);
   }, [selectedYear]);
 
+  // 4) sticky 제어: experience__content가 끝날 때 tabs 고정 해제
+  useEffect(() => {
+    if (!tabsRef.current || !contentRef.current || !containerRef.current) return;
+
+    const tabs = tabsRef.current;
+    const content = contentRef.current;
+    const container = containerRef.current;
+    const headerHeight = 90; // 헤더 높이 + 여백
+
+    const handleScroll = () => {
+      const containerRect = container.getBoundingClientRect();
+      const contentRect = content.getBoundingClientRect();
+      const tabsRect = tabs.getBoundingClientRect();
+
+      // container의 끝이 viewport에 도달했는지 확인
+      const containerBottom = containerRect.bottom;
+      const viewportHeight = window.innerHeight;
+      // container가 끝나면 (content도 함께 끝남) sticky 해제
+      if (containerBottom <= headerHeight) {
+        tabs.style.position = 'relative';
+        tabs.style.top = '0';
+      } else {
+        // content가 아직 스크롤 중이면 sticky 유지
+        tabs.style.position = 'sticky';
+        tabs.style.top = `${headerHeight}px`;
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleScroll, { passive: true });
+    handleScroll(); // 초기 실행
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
+    };
+  }, [companyList]); // companyList가 변경될 때마다 재계산
+
   return (
     <section id="experience" className="experience-section">
-      <h2>
-        <span className="section-number">02.</span>
-        Where I've Worked
-      </h2>
-      
-      <div className="experience__container">
-        <div className="experience__tabs">
+      <div className="experience__container" ref={containerRef}>
+        <div className="experience__tabs" ref={tabsRef}>
+          <h2 className="section__title">Worked</h2>
           <select
             className="experience__select"
             name="period"
@@ -77,7 +116,7 @@ export default function Career() {
           </select>
         </div>
 
-        <div className="experience__content">
+        <div className="experience__content" ref={contentRef}>
           {companyList.map((c, idx) => (
             <div key={c.id} className="experience__item">
               <div className="experience__header">

@@ -70,86 +70,83 @@ function Filters({ filters, onChange, projects }: FiltersProps) {
 
   return (
     <section id="projects" className="projects-section">
-      <h2>
-        <span className="section-number">03.</span>
-        Some Things I've Built
-      </h2>
-      
       <div className="filters">
-        <div className="filters__header">
-          <button className="filters__reset" type="button" onClick={handleReset}>
-            Reset
-          </button>
-        </div>
 
-      <div className="filters__group">
-        <span className="filters__label">Stack</span>
-        <div className="filters__chips">
-          {STACK_OPTIONS.map((stack) => (
-            <button
-              key={stack}
-              type="button"
-              className={`skill-chip ${
-                filters.stack === stack ? "is-active" : ""
-              }`}
-              onClick={() => handleSelect("stack", stack)}
-            >
-              {stack}({countByStack(stack)})
+        <div className="filters__group">
+          <div className="filters__header">
+            <h2 className="section__title">Stack</h2>
+            <button className="filters__reset" type="button" onClick={handleReset}>
+                Reset
             </button>
-          ))}
+          </div>
+          <div className="filters__chips">
+            {STACK_OPTIONS.map((stack) => (
+              <button
+                key={stack}
+                type="button"
+                className={`skill-chip ${
+                  filters.stack === stack ? "is-active" : ""
+                }`}
+                onClick={() => handleSelect("stack", stack)}
+              >
+                {stack}({countByStack(stack)})
+              </button>
+            ))}
+          </div>
         </div>
-      </div>
+        <div className="filters_select-group">
+          <div className="filters__row">
+            <label className="filters__label" htmlFor="difficulty">
+              난이도
+            </label>
+            <select
+              id="difficulty"
+              name="difficulty"
+              value={filters.difficulty ?? "all"}
+              onChange={handleSelectChange}
+            >
+              {DIFFICULTY_OPTIONS.map((option) => (
+                <option key={option} value={option}>
+                  {option === "all" ? "전체" : option}
+                </option>
+              ))}
+            </select>
+          </div>
+        
 
-      <div className="filters__row">
-        <label className="filters__label" htmlFor="difficulty">
-          난이도
-        </label>
-        <select
-          id="difficulty"
-          name="difficulty"
-          value={filters.difficulty ?? "all"}
-          onChange={handleSelectChange}
-        >
-          {DIFFICULTY_OPTIONS.map((option) => (
-            <option key={option} value={option}>
-              {option === "all" ? "전체" : option}
-            </option>
-          ))}
-        </select>
-      </div>
+          <div className="filters__row">
+            <label className="filters__label" htmlFor="duration">
+              기간
+            </label>
+            <select
+              id="duration"
+              name="duration"
+              value={filters.duration ?? "all"}
+              onChange={handleSelectChange}
+            >
+              {DURATION_OPTIONS.map((option) => (
+                <option key={option} value={option}>
+                  {labelForDuration(option)}
+                </option>
+              ))}
+            </select>
+          </div>
 
-      <div className="filters__row">
-        <label className="filters__label" htmlFor="duration">
-          기간
-        </label>
-        <select
-          id="duration"
-          name="duration"
-          value={filters.duration ?? "all"}
-          onChange={handleSelectChange}
-        >
-          {DURATION_OPTIONS.map((option) => (
-            <option key={option} value={option}>
-              {labelForDuration(option)}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      <div className="filters__row">
-        <label className="filters__label" htmlFor="sort">
-          정렬
-        </label>
-        <select
-          id="sort"
-          name="sort"
-          value={filters.sort}
-          onChange={handleSelectChange}
-        >
-          <option value="recent">최근 시작일</option>
-          <option value="duration">소요 기간</option>
-        </select>
-      </div>
+          <div className="filters__row">
+            <label className="filters__label" htmlFor="sort">
+              정렬
+            </label>
+            <select
+              id="sort"
+              name="sort"
+              value={filters.sort}
+              onChange={handleSelectChange}
+            >
+              <option value="recent">최근 시작일</option>
+              <option value="duration">소요 기간</option>
+            </select>
+          </div>
+        </div>
       </div>
     </section>
   );

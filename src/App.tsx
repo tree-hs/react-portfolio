@@ -46,13 +46,16 @@ const parseFilters = (searchParams: URLSearchParams): FilterState => {
   };
 };
 
+
 function AboutSection() {
   return (
     <section id="about" className="about-section">
-      <h2>
-        <span className="section-number">01.</span>
-        About Me
-      </h2>
+      <div className="about__title">
+        <h2 className="section__title">
+          React portfolio
+        </h2>
+        <span className="section__title-accent">Frontend developer</span>
+      </div>
       <div className="about__content">
         <div className="about__text">
           <p>
@@ -65,12 +68,18 @@ function AboutSection() {
           </p>
           <p>주로 사용하는 기술 스택:</p>
           <ul className="about__skills">
-            <li>JavaScript (ES6+)</li>
+            <li>JavaScript</li>
+            <li>Html</li>
+            <li>Css</li>
             <li>TypeScript</li>
+            <li>Jquery</li>
             <li>React</li>
-            <li>HTML & CSS/SCSS</li>
-            <li>Vite</li>
+            <li>Php</li>
+            <li>MySQL</li>
           </ul>
+          <a href="#projects" className="about__cta">
+            View services
+          </a>
         </div>
       </div>
     </section>
@@ -123,15 +132,17 @@ function ProjectPage() {
   return (
     <>
       <AboutSection />
-      <Career />
-      <Filters
-        filters={filters}
-        onChange={handleFilterChange}
-        projects={projects}
-      />
-      {loadError && <p className="error-message">Failed to fetch: {loadError}</p>}
-      <ProjectList filters={filters} activeProjectId={activeId} />
-      <ProjectDetail projectId={activeId} filters={filters} />
+      <section id="projects" className="projects-section">
+        <Career />
+        <Filters
+          filters={filters}
+          onChange={handleFilterChange}
+          projects={projects}
+        />
+        {loadError && <p className="error-message">Failed to fetch: {loadError}</p>}
+        <ProjectList filters={filters} activeProjectId={activeId} />
+        <ProjectDetail projectId={activeId} filters={filters} />
+      </section>
     </>
   );
 }
