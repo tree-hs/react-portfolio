@@ -955,6 +955,86 @@ section {
   font-size: 13px;
 }
 
+// TOP50 이미지 갤러리 (LLM 국내 주식 TOP50 프로젝트)
+.project-detail__top50-gallery {
+  margin-top: 30px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.project-detail__gallery-desc {
+  margin: 0 0 20px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.project-detail__image-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.project-detail__gallery-item {
+  display: block;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.project-detail__gallery-item:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.project-detail__gallery-img {
+  display: block;
+  width: 300px;
+  height: auto;
+  vertical-align: middle;
+}
+
+// 라이트박스: 어두운 배경 + 원본 크기 이미지
+.project-detail__lightbox-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.88);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2100;
+  padding: 20px;
+  animation: fadeIn 0.2s ease;
+  cursor: pointer;
+}
+
+.project-detail__lightbox-image {
+  max-width: 90vw;
+  max-height: 90vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  cursor: default;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+  .project-detail__gallery-img {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
 // Footer Styles
 .footer {
   padding: 80px 0;
