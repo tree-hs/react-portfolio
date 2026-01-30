@@ -183,10 +183,10 @@
     "company": "지오이스트",
     "employmentType": "프리랜서",
     "team": "개발팀",
-    "position": "퍼블리셔",
+    "position": "프론트엔드 개발자",
     "period": { "start": "2026.01", "end": "2026.03" },
     "highlights": [
-      "- 자사 서비스모델 b2b 플랫폼 퍼블리싱"
+      "- 자사 서비스모델 b2b 플랫폼 프론트엔드 개발"
     ],
     "techStack": [
       "react",
