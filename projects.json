@@ -95,11 +95,11 @@
       "JavaScript",
       "cursorAI"
     ],
-    "description": "[포트폴리오]",
+    "description": "[포트폴리오] 보안 문제로 api key 제거함",
     "difficulty": "초급",
     "period": { "start": "2026-01", "end": "2026-01" },
     "repository": "https://github.com/tree-hs/korea_exchage_stockTop50",
-    "demoUrl": "https://tree-hs.github.io/korea_exchage_stockTop50/",
+    "demoUrl": "",
     "teamSize": 1
   }
 ]
