@@ -101,5 +101,16 @@
     "repository": "https://github.com/tree-hs/korea_exchage_stockTop50",
     "demoUrl": "",
     "teamSize": 1
+  },
+  {
+    "id": 9,
+    "title": "메모",
+    "skills": ["Next.js", "TypeScript", "Prisma", "SQLite"],
+    "description": "[포트폴리오] 날짜/시간과 함께 DB 저장, 다크모드",
+    "difficulty": "초급",
+    "period": { "start": "2026-01", "end": "2026-01" },
+    "repository": "",
+    "demoUrl": "",
+    "teamSize": 1
   }
 ]
