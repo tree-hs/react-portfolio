@@ -7,10 +7,10 @@ interface ProjectCardProps {
 }
 
 const formatPeriod = (start: string, end?: string) => {
-  const startDate = new Date(start).toISOString().slice(0, 10);
-  if (!end) return `${startDate} ~ 진행중`;
-  const endDate = new Date(end).toISOString().slice(0, 10);
-  return `${startDate} ~ ${endDate}`;
+  const toYearMonth = (s: string) => s.slice(0, 7);
+  const startStr = toYearMonth(start);
+  if (!end) return `${startStr} ~ 진행중`;
+  return `${startStr} ~ ${toYearMonth(end)}`;
 };
 
 function ProjectCard({ project, isActive }: ProjectCardProps) {
