@@ -1,6 +1,7 @@
 @use "./palette.legacy" as pal;
 @use "sass:map";
 @use "sass:list";
+@use "sass:meta";
 
 /* =========================
    1) THEME VARS (only vars)
@@ -107,7 +108,7 @@ $palette-keys: map.keys(pal.$palette-light);
 }
 
 @function _as-list($v) {
-  @return if(type-of($v) == "list", $v, ($v));
+  @return if(meta.type-of($v) == "list", $v, ($v));
 }
 
 @mixin scale(

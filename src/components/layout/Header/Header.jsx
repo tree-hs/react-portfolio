@@ -3,10 +3,12 @@ import { Link, useLocation } from "react-router-dom";
 import HeaderTheme from "./HeaderTheme";
 import "./Header.scss";
 
+// path가 "#..." 이면 같은 페이지 내 스크롤(앵커), "/..." 이면 라우터 이동(<Link>).
 const navItems = [
   { name: "About", path: "#about" },
   { name: "Work", path: "#projects" },
   { name: "Stack", path: "#stack" },
+  { name: "Lab", path: "/lab" },
 ];
 
 function Header() {
@@ -50,17 +52,24 @@ function Header() {
         <ul className="header__menu">
           {navItems.map((item, idx) => (
             <li key={idx} className="header__menu-item">
-              <a
-                href={item.path}
-                className="header__menu-link"
-                onClick={(e) => {
-                  e.preventDefault();
-                  scrollToSection(item.path);
-                }}
-              >
-                <span className="header__menu-number">0{idx + 1}.</span>
-                {item.name}
-              </a>
+              {item.path.startsWith("#") ? (
+                <a
+                  href={item.path}
+                  className="header__menu-link"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    scrollToSection(item.path);
+                  }}
+                >
+                  <span className="header__menu-number">0{idx + 1}.</span>
+                  {item.name}
+                </a>
+              ) : (
+                <Link to={item.path} className="header__menu-link">
+                  <span className="header__menu-number">0{idx + 1}.</span>
+                  {item.name}
+                </Link>
+              )}
             </li>
           ))}
         </ul>

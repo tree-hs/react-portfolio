@@ -1,0 +1,338 @@
+/* ============================================================
+   WebGL Lab 스타일
+   - 메인 사이트의 CSS 변수(--bg/--text/--muted/--chip-bg ...)를 그대로 사용
+   ============================================================ */
+
+.lab {
+  padding: 100px 0 120px;
+
+  @media (max-width: 768px) {
+    padding: 80px 0 80px;
+  }
+}
+
+/* ---- 랜딩 헤더 ---- */
+.lab__header {
+  max-width: 760px;
+  margin-bottom: 56px;
+}
+
+.lab__title {
+  font-size: clamp(40px, 8vw, 88px);
+  line-height: 1.05;
+  margin-bottom: 20px;
+}
+
+.lab__lead {
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.8;
+  margin: 0 0 24px;
+
+  @media (max-width: 768px) {
+    font-size: 15px;
+  }
+}
+
+.lab__legend {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+
+  li {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--muted);
+  }
+}
+
+/* ---- 뱃지 / 태그 ---- */
+.lab-badge {
+  display: inline-block;
+  padding: 3px 8px;
+  font-size: 11px;
+  font-family: "SF Mono", "Monaco", "Inconsolata", "Fira Code", monospace;
+  letter-spacing: 0.02em;
+  background: var(--chip-active-bg);
+  color: var(--chip-active-text);
+  border: 1px solid var(--text);
+  white-space: nowrap;
+
+  &--phase {
+    background: transparent;
+    color: var(--muted);
+    border-color: var(--muted);
+  }
+}
+
+.lab-tag {
+  display: inline-block;
+  padding: 4px 10px;
+  font-size: 12px;
+  background: var(--chip-bg);
+  color: var(--chip-text);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* ---- 데모 카드 그리드 ---- */
+.lab__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 32px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+.lab-card {
+  border: 1px solid var(--muted);
+  background: var(--bg);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+
+  &:hover {
+    border-color: var(--text);
+    transform: translateY(-4px);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
+  }
+
+  &--planned {
+    opacity: 0.55;
+  }
+  &--wip .lab-card__thumb::after {
+    content: "WIP";
+    position: absolute;
+    right: 12px;
+    bottom: 10px;
+    font-size: 11px;
+    font-family: "SF Mono", monospace;
+    color: var(--muted);
+  }
+}
+
+.lab-card__link {
+  display: block;
+  color: inherit;
+
+  &:hover {
+    color: inherit;
+  }
+}
+
+.lab-card__thumb {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 140px;
+  font-size: 56px;
+  font-family: "SF Mono", "Monaco", monospace;
+  color: var(--muted-light);
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.04), rgba(0, 0, 0, 0.09));
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+body[data-theme="dark"] .lab-card__thumb {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.09));
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+.lab-card__body {
+  padding: 22px 24px 26px;
+}
+
+.lab-card__title {
+  font-size: 21px;
+  line-height: 1.25;
+  margin: 0 0 10px;
+}
+
+.lab-card__summary {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.7;
+  margin: 0 0 16px;
+}
+
+.lab-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.lab-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* ---- 데모 페이지 ---- */
+.lab--demo {
+  padding-top: 90px;
+}
+
+.lab__back {
+  display: inline-block;
+  margin-bottom: 20px;
+  font-family: "SF Mono", "Monaco", monospace;
+  font-size: 14px;
+  color: var(--muted);
+
+  &:hover {
+    color: var(--text);
+  }
+}
+
+.lab-demo__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(280px, 1fr);
+  gap: 36px;
+  align-items: start;
+
+  @media (max-width: 980px) {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+}
+
+.lab-demo__stage {
+  position: sticky;
+  top: 90px;
+
+  @media (max-width: 980px) {
+    position: relative;
+    top: 0;
+  }
+}
+
+/* <Canvas>는 부모 크기를 채우므로 여기서 명시적 높이를 준다 */
+.lab-canvas {
+  width: 100%;
+  height: 70vh;
+  min-height: 420px;
+  max-height: 720px;
+  border: 1px solid var(--muted);
+  overflow: hidden;
+
+  @media (max-width: 980px) {
+    height: 56vh;
+    min-height: 340px;
+  }
+
+  &--loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--muted-light);
+    font-family: "SF Mono", monospace;
+    font-size: 14px;
+    background: #1a1a1f;
+  }
+}
+
+/* ---- 설명 패널 ---- */
+.lab-explain {
+  font-size: 15px;
+  line-height: 1.7;
+
+  &__badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  &__title {
+    font-size: 26px;
+    line-height: 1.3;
+    margin: 0 0 12px;
+  }
+
+  &__no {
+    font-family: "SF Mono", "Monaco", monospace;
+    color: var(--muted-light);
+  }
+
+  &__lead {
+    color: var(--muted);
+    margin: 0 0 28px;
+  }
+
+  &__h2 {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin: 28px 0 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  &__concepts {
+    margin: 0;
+  }
+
+  &__concept {
+    margin-bottom: 14px;
+
+    dt {
+      font-weight: 500;
+      color: var(--text);
+      font-family: "SF Mono", "Monaco", monospace;
+      font-size: 13.5px;
+      margin-bottom: 3px;
+    }
+    dd {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+  }
+
+  &__learned {
+    margin: 0;
+    padding-left: 18px;
+
+    li {
+      margin-bottom: 8px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+  }
+
+  &__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 24px 0 20px;
+  }
+
+  &__source {
+    display: inline-block;
+    padding: 10px 18px;
+    background: var(--btn-bg);
+    color: var(--btn-text);
+    font-size: 14px;
+    font-family: "SF Mono", "Monaco", monospace;
+
+    &:hover {
+      background: var(--btn-bg-hover);
+      color: var(--btn-text);
+    }
+  }
+}
+
+.lab--missing {
+  padding-top: 120px;
+  color: var(--muted);
+}

@@ -266,6 +266,17 @@ button {
   padding: 0;
   margin-top: 0;
 }
+
+/* /lab chunk(코드 스플리팅) 로딩 중 표시 */
+.lab-loading {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', monospace;
+  font-size: 14px;
+}
 .filters {
   background: transparent;
   border-radius: 0;

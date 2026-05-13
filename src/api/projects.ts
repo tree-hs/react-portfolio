@@ -121,14 +121,14 @@ export const STACK_OPTIONS: Skill[] = [
   "Jquery",
 ];
 
-export const DIFFICULTY_OPTIONS: ProjectQueryParams["difficulty"][] = [
+export const DIFFICULTY_OPTIONS: NonNullable<ProjectQueryParams["difficulty"]>[] = [
   "all",
   "초급",
   "중급",
   "고급",
 ];
 
-export const DURATION_OPTIONS: ProjectQueryParams["duration"][] = [
+export const DURATION_OPTIONS: NonNullable<ProjectQueryParams["duration"]>[] = [
   "all",
   "short",
   "medium",

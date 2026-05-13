@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { lazy, Suspense, useEffect, useMemo, useState } from "react";
 import { Route, Routes, useParams, useSearchParams } from "react-router-dom";
 import Career from "./components/Career/Career";
 import Filters, { FilterState } from "./components/Filters/Filters";
@@ -16,6 +16,11 @@ import "./styles/reset.scss";
 import "./styles/template.scss";
 import "./App.scss";
 
+// WebGL Lab — three/R3F 같은 무거운 의존성이 메인 번들에 들어오지 않도록
+// React.lazy + dynamic import 로 코드 스플리팅 (LabPage / LabDemoPage 와 각 데모는 별도 chunk).
+const LabPage = lazy(() => import("./lab/LabPage"));
+const LabDemoPage = lazy(() => import("./lab/LabDemoPage"));
+
 const DEFAULT_FILTERS: FilterState = {
   stack: "All",
   difficulty: "all",
@@ -26,7 +31,7 @@ const DEFAULT_FILTERS: FilterState = {
 const isValidOption = <T extends string>(
   value: string | null,
   list: readonly T[]
-): value is T => !!value && (list as string[]).includes(value);
+): value is T => !!value && (list as readonly string[]).includes(value);
 
 const parseFilters = (searchParams: URLSearchParams): FilterState => {
   const stack = searchParams.get("stack");
@@ -51,32 +56,39 @@ function AboutSection() {
   return (
     <section id="about" className="about-section">
       <div className="about__title">
-        <h2 className="section__title">
-          React portfolio
-        </h2>
-        <span className="section__title-accent">Frontend developer</span>
+        <h2 className="section__title">Hs portfolio</h2>
+        <span className="section__title-accent">Frontend Developer</span>
       </div>
       <div className="about__content">
         <div className="about__text">
-          <p>
-            이것 저것 해보긴 했는데 퍼블리셔 포지션으로만 경력을 쌓아서
-            퍼블리싱 외 대다수 stack은 초급이라 생각해서 초급이라 했습니다.
-          </p>
-          <p>
-            현재는 React와 TypeScript를 활용한 프론트엔드 개발에 집중하고 있으며,
-            사용자 경험을 개선하고 접근성을 고려한 웹 애플리케이션을 만드는 것을 좋아합니다.
-          </p>
-          <p>주로 사용하는 기술 스택:</p>
-          <ul className="about__skills">
-            <li>JavaScript</li>
-            <li>Html</li>
-            <li>Css</li>
-            <li>TypeScript</li>
-            <li>Jquery</li>
-            <li>React</li>
-            <li>Php</li>
-            <li>MySQL</li>
-          </ul>
+          <table style={{ marginBottom: "24px" }}>
+            <colgroup>
+              <col style={{ width: "30%" }} />
+              <col style={{ width: "70%" }} />
+            </colgroup>
+            <tbody>
+              <tr>
+                <th>이름</th>
+                <td>정한석</td>
+              </tr>
+              <tr>
+                <th>생년월일</th>
+                <td>1991-07-03</td>
+              </tr>
+              <tr>
+                <th>이메일</th>
+                <td>harrison14@naver.com</td>
+              </tr>
+              <tr>
+                <th>학력</th>
+                <td>서일대 졸업 (인터넷정보과)</td>
+              </tr>
+              <tr>
+                <th>연락처</th>
+                <td>010-3268-2612</td>
+              </tr>
+            </tbody>
+          </table>
           <a href="#projects" className="about__cta">
             View services
           </a>
@@ -154,10 +166,14 @@ function App() {
     <>
       <Header />
       <main className="main">
-        <Routes>
-          <Route path="/" element={<ProjectPage />} />
-          <Route path="/projects/:projectId" element={<ProjectPage />} />
-        </Routes>
+        <Suspense fallback={<div className="lab-loading">Loading…</div>}>
+          <Routes>
+            <Route path="/" element={<ProjectPage />} />
+            <Route path="/projects/:projectId" element={<ProjectPage />} />
+            <Route path="/lab" element={<LabPage />} />
+            <Route path="/lab/:demoId" element={<LabDemoPage />} />
+          </Routes>
+        </Suspense>
       </main>
       <Footer />
     </>
