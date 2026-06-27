@@ -1,0 +1,1 @@
+import{j as s,L as t}from"./index-D5znGMJm.js";import{d as e}from"./registry-NJrdjn60.js";function n(){return s.jsxs("section",{className:"test-lab",style:{padding:"100px 0 120px"},children:["testLabPage",s.jsx(t,{to:`/testLab/${e[0].id}`,children:"Test sub Link"})]})}export{n as default};

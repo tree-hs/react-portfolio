@@ -1,0 +1,1 @@
+.sass-token-demo{background:var(--bg);color:var(--text);border:1px solid var(--muted);transition:background .3s ease,color .3s ease,border-color .3s ease;padding:18px 20px;border-radius:8px;font-family:SF Mono,Monaco,monospace;font-size:14px;line-height:1.8}.sass-token-demo strong{color:var(--accent)}.sass-token-demo__hint{margin-top:8px;color:var(--muted-light);font-size:13px}

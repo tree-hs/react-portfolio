@@ -1,0 +1,1 @@
+.sass-fn-demo{padding:16px 24px;font-size:1.125rem;border-radius:.5rem;border:2px solid rgb(18.5714285714,76.1428571429,202.4285714286);background:#f7f9fe;color:#0e3b9c;font-family:SF Mono,Monaco,monospace}.sass-fn-demo__row{display:flex;justify-content:space-between;padding:4px 0}.sass-fn-demo__row+.sass-fn-demo__row{border-top:1px dashed rgba(0,0,0,.15)}

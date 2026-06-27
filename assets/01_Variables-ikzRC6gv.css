@@ -1,0 +1,1 @@
+.sass-card{padding:16px;border:2px solid #2563eb;border-radius:6px;display:flex;gap:12px;align-items:center;color:#2563eb}.sass-card:hover{background:#2563eb0d}.sass-card--primary{background:#2563eb;color:#fff}.sass-card__label{font-weight:600}.sass-card+.sass-card{margin-top:12px}

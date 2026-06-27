@@ -1,0 +1,1 @@
+import{j as s}from"./index-D5znGMJm.js";function a(){return s.jsxs("div",{className:"sass-toolbar",children:[s.jsx("button",{type:"button",className:"sass-btn--primary",children:"Primary"}),s.jsx("button",{type:"button",className:"sass-btn--danger",children:"Danger"}),s.jsx("button",{type:"button",className:"sass-btn--ghost",children:"Ghost"})]})}export{a as default};
