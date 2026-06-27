@@ -13,6 +13,7 @@ import {
   STACK_OPTIONS,
 } from "./api/projects";
 import { AnimatedText, Reveal, ScrollRevealParagraph } from "./motion";
+import Hero from "./hero/Hero";
 import "./styles/reset.scss";
 import "./styles/template.scss";
 import "./App.scss";
@@ -61,9 +62,9 @@ function AboutSection() {
   return (
     <section id="about" className="about-section">
       <div className="about__title">
-        <AnimatedText as="h2" className="section__title" text="Hs portfolio" />
+        <AnimatedText as="h2" className="section__title" text="About" />
         <Reveal delay={0.3}>
-          <span className="section__title-accent">Frontend Developer</span>
+          <span className="section__title-accent">정한석 · 9년차 → 프론트엔드</span>
         </Reveal>
       </div>
       <ScrollRevealParagraph
@@ -154,6 +155,7 @@ function ProjectPage() {
 
   return (
     <>
+      <Hero />
       <AboutSection />
       <section id="projects" className="projects-section">
         <Career />
