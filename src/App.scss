@@ -684,6 +684,7 @@ section {
 }
 
 .project-card {
+  position: relative;
   border-radius: 0;
   padding: 30px;
   background: var(--surface);
@@ -693,6 +694,18 @@ section {
     box-shadow var(--dur-fast) var(--ease-out-expo);
   height: 100%;
 
+  // 상단에 호버 시 그어지는 brand 라인 (olivierlarose 류 디테일)
+  &::after {
+    content: "";
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    height: 2px;
+    width: 0;
+    background: var(--brand);
+    transition: width var(--dur) var(--ease-out-expo);
+  }
+
   @media (max-width: 768px) {
     padding: 20px;
   }
@@ -701,11 +714,29 @@ section {
     border-color: var(--brand);
     transform: translateY(-4px);
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+
+    &::after {
+      width: calc(100% + 2px);
+    }
+
+    .project-card__header h3 {
+      color: var(--brand);
+    }
+
+    .project-card__arrow {
+      opacity: 1;
+      transform: translate(0, 0);
+      color: var(--brand);
+    }
   }
 }
 
 .project-card--active {
   border-color: var(--brand);
+
+  &::after {
+    width: calc(100% + 2px);
+  }
 }
 
 .project-card__header {
@@ -719,7 +750,20 @@ section {
     color: var(--text);
     font-weight: 400;
     line-height: 1.2;
+    transition: color var(--dur-fast) var(--ease-out-expo);
   }
+}
+
+.project-card__arrow {
+  flex-shrink: 0;
+  font-size: 24px;
+  line-height: 1;
+  color: var(--muted);
+  opacity: 0;
+  transform: translate(-6px, 6px);
+  transition: opacity var(--dur-fast) var(--ease-out-expo),
+    transform var(--dur-fast) var(--ease-out-expo),
+    color var(--dur-fast) var(--ease-out-expo);
 }
 
 .project-card__label {

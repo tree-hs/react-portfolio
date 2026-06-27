@@ -25,6 +25,9 @@ function ProjectCard({ project, isActive }: ProjectCardProps) {
           <p className="project-card__label">{project.difficulty}</p>
           <h3>{project.title}</h3>
         </div>
+        <span className="project-card__arrow" aria-hidden="true">
+          ↗
+        </span>
       </div>
 
       <p className="project-card__description">{project.description}</p>
