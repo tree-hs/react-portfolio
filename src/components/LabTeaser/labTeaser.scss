@@ -1,0 +1,120 @@
+// ─────────────────────────────────────────────────────────────────────────────
+//  LabTeaser — 홈 시그니처 섹션 (토큰 기반, 이미지 없는 텍스트 리스트)
+// ─────────────────────────────────────────────────────────────────────────────
+.lab-teaser {
+  padding: 40px 0 20px;
+}
+
+.lab-teaser__head {
+  margin-bottom: 40px;
+}
+
+.lab-teaser__lead {
+  max-width: 640px;
+  margin: 18px 0 0;
+  color: var(--muted-light);
+  font-size: clamp(15px, 2vw, 19px);
+  line-height: 1.7;
+}
+
+.lab-teaser__list {
+  border-top: 1px solid var(--border);
+}
+
+// 한 줄 = 데모 하나. 호버 시 들여쓰기 + brand 컬러 + 화살표 이동(olivierlarose 류)
+.lab-teaser__row {
+  display: grid;
+  grid-template-columns: 56px 1fr auto 28px;
+  align-items: center;
+  gap: 20px;
+  padding: 26px 8px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+  text-decoration: none;
+  transition: padding var(--dur-fast) var(--ease-out-expo),
+    background var(--dur-fast) var(--ease-out-expo),
+    color var(--dur-fast) var(--ease-out-expo);
+
+  &:hover {
+    padding-left: 20px;
+    color: var(--brand);
+    background: linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--brand) 8%, transparent),
+      transparent 70%
+    );
+
+    .lab-teaser__title {
+      color: var(--brand);
+    }
+    .lab-teaser__arrow {
+      transform: translateX(6px);
+      opacity: 1;
+      color: var(--brand);
+    }
+  }
+
+  &--planned {
+    opacity: 0.5;
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: 40px 1fr 24px;
+    gap: 14px;
+    padding: 20px 6px;
+  }
+}
+
+.lab-teaser__no {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--brand);
+}
+
+.lab-teaser__title {
+  font-family: var(--font-display);
+  font-size: clamp(20px, 3vw, 30px);
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  transition: color var(--dur-fast) var(--ease-out-expo);
+}
+
+.lab-teaser__tags {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--muted);
+  white-space: nowrap;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+
+.lab-teaser__arrow {
+  font-size: 20px;
+  text-align: right;
+  opacity: 0.3;
+  transition: transform var(--dur-fast) var(--ease-out-expo),
+    opacity var(--dur-fast) var(--ease-out-expo),
+    color var(--dur-fast) var(--ease-out-expo);
+}
+
+.lab-teaser__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 36px;
+  padding: 14px 22px;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--text);
+  text-decoration: none;
+  border: 1px solid var(--border);
+  transition: border-color var(--dur-fast) var(--ease-out-expo),
+    color var(--dur-fast) var(--ease-out-expo);
+
+  &:hover {
+    border-color: var(--brand);
+    color: var(--brand);
+  }
+}

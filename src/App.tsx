@@ -14,6 +14,7 @@ import {
 } from "./api/projects";
 import { AnimatedText, Reveal, ScrollRevealParagraph } from "./motion";
 import Hero from "./hero/Hero";
+import LabTeaser from "./components/LabTeaser/LabTeaser";
 import "./styles/reset.scss";
 import "./styles/template.scss";
 import "./App.scss";
@@ -169,6 +170,9 @@ function ProjectPage() {
         {loadError && <p className="error-message">Failed to fetch: {loadError}</p>}
         <ProjectList filters={filters} activeProjectId={activeId} />
         <ProjectDetail projectId={activeId} filters={filters} />
+      </section>
+      <section className="lab-teaser-section">
+        <LabTeaser />
       </section>
     </>
   );
