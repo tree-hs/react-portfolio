@@ -91,13 +91,13 @@ src/lab/
 > 다음(Phase 1) 시작 전 TODO: `registry.ts` 의 `GITHUB_BASE` 를 본인 레포 실제 경로로 확인/수정.
 
 ### Phase 1 — Renderer 내부 동작 이해 (목표 2주) → 공고 C
-- [ ] **데모 02 (raw WebGL)**: 라이브러리 없이 `<canvas>`에 삼각형 1개. 직접 다뤄볼 것:
-  - `getContext('webgl')`, vertex/fragment shader 문자열, `createShader`/`compileShader`/`linkProgram`
-  - `createBuffer` → `bufferData` (VBO), `getAttribLocation` → `vertexAttribPointer` → `enableVertexAttribArray`
-  - `useUniformLocation`, `clear`, `drawArrays` — "draw call이 뭔지" 손으로 체득
-- [ ] 정리 문서 `docs/RENDERER_NOTES.md`: 위 흐름을 그림/글로. 그리고 Three.js `WebGLRenderer`가 이 과정을 어떻게 자동화하는지 — render loop, `renderer.info`(draw calls, triangles, geometries, textures), frustum culling, depth test, render targets, `renderer.dispose()`.
-- [ ] **데모 03 (Scene graph)**: 부모-자식 그룹 transform 시각화 (자식이 부모를 따라 도는 태양계 류). `scene.add`, matrix 합성, `renderer.info` 패널 항상 표시.
-- 산출물: "나는 Renderer가 내부에서 뭘 하는지 안다"를 보여주는 데모 2개 + 노트 문서.
+- [x] **데모 02 (raw WebGL)** `src/lab/demos/02-raw-webgl-triangle/RawTriangle.tsx`: 라이브러리 없이 `<canvas>` + WebGL API로 회전하는 무지개 삼각형. 셰이더 컴파일/링크 헬퍼, VBO 2개(position·color), uTime/uSpeed/uAspect/uIntensity uniform, drawArrays, dispose까지 직접. 우상단에 FPS / draw calls per sec 오버레이.
+- [x] **노트 문서** `docs/RENDERER_NOTES.md`: 한 프레임 파이프라인 → raw WebGL 13단계와 코드 매핑 → Three.js `WebGLRenderer`가 자동화하는 항목 1:1 비교 → `renderer.info` 해석 → draw call 비용(Phase 3 예고편) → `dispose()` 의 진짜 의미. 마지막에 같은 삼각형을 Three.js로 옮기면 170줄→20줄로 짧아진다는 비교.
+- [ ] **데모 03 (Scene graph)**: 부모-자식 그룹 transform 시각화 (자식이 부모를 따라 도는 태양계 류). `scene.add`, matrix 합성, `renderer.info` 패널 항상 표시. — 다음 세션 예정.
+- 메모/결정:
+  - 빌드 결과: `RawTriangle-*.js` **5.2 kB** (라이브러리 없음) vs `RotatingCube-*.js` **909 kB** (three+R3F+drei). 두 chunk 크기 차이 자체가 "Three.js가 대신해주는 일의 양"의 시각적 증거 → RENDERER_NOTES에 적어둠.
+  - `function 선언` 안에서는 외부 스코프의 null narrowing이 풀리는 TS 함정 발견 → resize/tick을 `const` 화살표로. 주석에 이유 적음.
+  - leva 값을 매 프레임 최신으로 읽으려고 `stateRef` 패턴(별도 effect로 ref 동기화). useEffect deps를 빈 배열로 두면서 외부 값을 closure에서 읽는 정석.
 
 ### Phase 2 — GLSL / Shader(Material) (목표 3~4주) → 공고 A (핵심)
 GLSL 기본기부터: 좌표계(clip space, UV), `attribute`/`uniform`/`varying`, `precision`, swizzle, `mix`/`step`/`smoothstep`/`fract`, 노이즈 함수.

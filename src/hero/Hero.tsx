@@ -48,14 +48,12 @@ export default function Hero() {
         <AnimatedText
           as="h1"
           className="hero__title"
-          text="Frontend Developer"
+          text="Hs Portfolio"
           stagger={0.08}
         />
         <Reveal delay={0.5} y={20}>
           <p className="hero__tagline">
-            웹 퍼블리셔 9년의 마크업·접근성·디자인 감각 위에
-            <br />
-            React · TypeScript 로 직접 만들고 배포하는 프론트엔드.
+            끊임 없이 배워나가 프론트엔드 개발자입니다.
           </p>
         </Reveal>
       </div>

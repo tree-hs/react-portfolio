@@ -64,9 +64,6 @@ function AboutSection() {
     <section id="about" className="about-section">
       <div className="about__title">
         <AnimatedText as="h2" className="section__title" text="About" />
-        <Reveal delay={0.3}>
-          <span className="section__title-accent">정한석 · 9년차 → 프론트엔드</span>
-        </Reveal>
       </div>
       <ScrollRevealParagraph
         className="about__intro"
