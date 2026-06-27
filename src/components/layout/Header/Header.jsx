@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLenis } from "lenis/react";
 import HeaderTheme from "./HeaderTheme";
@@ -20,7 +20,11 @@ const navItems = [
 function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  // 다른 라우트(/study, /lab)에서 앵커 메뉴를 눌렀을 때, 홈으로 이동한 뒤
+  // 스크롤할 섹션 hash를 잠시 보관한다.
+  const [pendingHash, setPendingHash] = useState(null);
   const location = useLocation();
+  const navigate = useNavigate();
   // Lenis 인스턴스(스무스 스크롤). 동작 줄이기 선호 시 SmoothScroll이 Lenis를
   // 마운트하지 않으므로 null → 아래에서 네이티브 scrollTo로 폴백.
   const lenis = useLenis();
@@ -43,11 +47,10 @@ function Header() {
     };
   }, [menuOpen]);
 
-  const scrollToSection = (path) => {
-    const hash = path.split("#")[1];
-    if (!hash) return;
+  // 지정한 섹션(id)으로 스크롤. 요소가 아직 없으면 false 반환.
+  const scrollToHash = (hash) => {
     const element = document.getElementById(hash);
-    if (!element) return;
+    if (!element) return false;
 
     // Lenis가 있으면 관성 스크롤로(offset 만큼 위에서 멈춤), 없으면 네이티브 폴백
     if (lenis) {
@@ -57,7 +60,40 @@ function Header() {
         element.getBoundingClientRect().top + window.pageYOffset - SCROLL_OFFSET;
       window.scrollTo({ top, behavior: "smooth" });
     }
+    return true;
   };
+
+  // 앵커 메뉴 클릭:
+  //  · 홈(/)이면 바로 해당 섹션으로 스크롤
+  //  · 다른 라우트면 홈으로 이동 후, 섹션이 마운트되면 스크롤(pendingHash + 아래 effect)
+  const handleAnchorNav = (path, onNavigate) => {
+    const hash = path.split("#")[1];
+    if (!hash) return;
+    if (location.pathname === "/") {
+      scrollToHash(hash);
+    } else {
+      setPendingHash(hash);
+      navigate("/");
+    }
+    onNavigate?.();
+  };
+
+  // 홈으로 막 이동했고 대기 중인 hash가 있으면, 섹션이 렌더된 다음 프레임에 스크롤.
+  useEffect(() => {
+    if (location.pathname !== "/" || !pendingHash) return;
+    let raf2;
+    const raf1 = requestAnimationFrame(() => {
+      raf2 = requestAnimationFrame(() => {
+        scrollToHash(pendingHash);
+        setPendingHash(null);
+      });
+    });
+    return () => {
+      cancelAnimationFrame(raf1);
+      if (raf2) cancelAnimationFrame(raf2);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location.pathname, pendingHash]);
 
   // 메뉴 항목 렌더 — 앵커/라우트 분기. onNavigate 로 모바일에서 클릭 시 닫기.
   const renderLink = (item, idx, onNavigate) => {
@@ -75,8 +111,7 @@ function Header() {
           className="header__menu-link"
           onClick={(e) => {
             e.preventDefault();
-            scrollToSection(item.path);
-            onNavigate?.();
+            handleAnchorNav(item.path, onNavigate);
           }}
         >
           {inner}
