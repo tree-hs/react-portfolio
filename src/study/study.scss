@@ -1,0 +1,619 @@
+/* ============================================================
+   Study Lab 스타일
+   - 메인 사이트의 CSS 변수(--bg/--text/--muted/--chip-bg ...)를 그대로 사용
+   - /lab 스타일과 톤을 통일
+   ============================================================ */
+
+.study {
+  padding: 100px 0 120px;
+
+  @media (max-width: 768px) {
+    padding: 80px 0 80px;
+  }
+}
+
+.study__header {
+  max-width: 760px;
+  margin-bottom: 36px;
+}
+
+.study__title {
+  font-size: clamp(44px, 9vw, 104px);
+  line-height: 1;
+  font-weight: 500;
+  margin-bottom: 24px;
+}
+
+.study__lead {
+  color: var(--muted-light);
+  font-size: clamp(15px, 2vw, 18px);
+  line-height: 1.8;
+  margin: 0;
+
+  strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+}
+
+/* ---- 카테고리 탭 ---- */
+.study__tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 36px 0 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0;
+}
+
+.study__tab {
+  position: relative;
+  padding: 12px 22px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-bottom: none;
+  color: var(--muted);
+  font-size: 15px;
+  font-family: var(--font-mono);
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: color 0.2s ease, background 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: -1px;
+
+  &:hover {
+    color: var(--text);
+    background: var(--chip-bg);
+  }
+
+  &.is-active {
+    color: var(--chip-active-text);
+    background: var(--chip-active-bg);
+    border-color: var(--text);
+  }
+}
+
+.study__tab-count {
+  font-size: 11px;
+  padding: 2px 7px;
+  background: var(--chip-bg);
+  border-radius: 0;
+
+  .is-active & {
+    background: rgba(255, 255, 255, 0.18);
+  }
+}
+
+.study__cat-desc {
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.7;
+  margin: 0 0 30px;
+  max-width: 760px;
+}
+
+/* ---- 목차 ---- */
+.study__toc {
+  list-style: none;
+  padding: 18px 22px;
+  margin: 0 0 40px;
+  border: 1px dashed var(--border);
+  background: var(--chip-bg);
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 6px 24px;
+
+  li {
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  a {
+    color: var(--text);
+    text-decoration: none;
+
+    &:hover {
+      color: var(--accent);
+    }
+  }
+}
+
+.study__toc-no {
+  font-family: var(--font-mono);
+  color: var(--muted);
+  margin-right: 8px;
+}
+
+/* ---- 레슨 카드 ---- */
+.study__lessons {
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+}
+
+.lesson {
+  scroll-margin-top: 100px;
+  padding-top: 30px;
+  border-top: 1px solid var(--border);
+
+  &:first-child {
+    border-top: none;
+    padding-top: 0;
+  }
+}
+
+.lesson__head {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 20px;
+  align-items: start;
+  margin-bottom: 24px;
+
+  @media (max-width: 600px) {
+    grid-template-columns: 60px 1fr;
+    gap: 14px;
+  }
+}
+
+.lesson__no {
+  font-size: 56px;
+  font-family: var(--font-mono);
+  color: var(--brand);
+  line-height: 1;
+
+  @media (max-width: 600px) {
+    font-size: 40px;
+  }
+}
+
+.lesson__title {
+  font-size: 28px;
+  line-height: 1.3;
+  margin: 0 0 8px;
+  font-weight: 400;
+
+  @media (max-width: 600px) {
+    font-size: 22px;
+  }
+}
+
+.lesson__summary {
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.7;
+  margin: 0 0 12px;
+}
+
+.lesson__keywords {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.lesson__keyword {
+  display: inline-block;
+  padding: 3px 8px;
+  font-size: 11px;
+  font-family: var(--font-mono);
+  letter-spacing: 0.02em;
+  background: var(--chip-bg);
+  color: var(--chip-text);
+  border: 1px solid var(--border);
+}
+
+body[data-theme="dark"] .lesson__keyword {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.lesson__why {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  background: var(--chip-bg);
+  padding: 16px 20px;
+  margin: 0 0 28px;
+  border-left: 3px solid var(--accent);
+
+  p {
+    margin: 0;
+    color: var(--text);
+    font-size: 14.5px;
+    line-height: 1.75;
+  }
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    gap: 6px;
+  }
+}
+
+.lesson__why-label {
+  flex: 0 0 auto;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding-top: 2px;
+}
+
+/* ---- 라이브 / 코드 2-up ---- */
+.lesson__split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+  gap: 24px;
+  margin-bottom: 28px;
+
+  @media (max-width: 980px) {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+
+.lesson__stage,
+.lesson__code {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.lesson__stage-label,
+.lesson__code-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+.lesson__stage-frame {
+  border: 1px solid var(--border);
+  padding: 20px;
+  background: var(--surface);
+  min-height: 200px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: stretch;
+
+  > * {
+    width: 100%;
+  }
+}
+
+.lesson__stage-loading {
+  color: var(--muted-light);
+  font-family: var(--font-mono);
+  font-size: 13px;
+}
+
+/* ---- 핵심 포인트 / 함정 ---- */
+.lesson__notes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+
+  @media (max-width: 980px) {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  section {
+    border: 1px solid var(--border);
+    padding: 18px 22px;
+  }
+
+  h3 {
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+    font-weight: 500;
+  }
+
+  ul {
+    margin: 0;
+    padding-left: 18px;
+
+    li {
+      color: var(--text);
+      font-size: 14px;
+      line-height: 1.75;
+      margin-bottom: 8px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+.lesson__pitfalls {
+  border-color: rgba(220, 38, 38, 0.35) !important;
+
+  h3 {
+    color: #dc2626;
+  }
+}
+
+body[data-theme="dark"] .lesson__pitfalls h3 {
+  color: #f87171;
+}
+
+/* ---- CodeBlock ---- */
+.codeblock {
+  border: 1px solid var(--border);
+  background: #0d0d12;
+  color: #e8e8ee;
+  font-family: var(--font-mono);
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+.codeblock__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 11px;
+}
+
+.codeblock__lang {
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.codeblock__copy {
+  background: rgba(255, 255, 255, 0.08);
+  color: #e8e8ee;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  padding: 4px 12px;
+  font-family: inherit;
+  font-size: 11px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.16);
+  }
+}
+
+.codeblock__pre {
+  margin: 0;
+  padding: 14px 18px;
+  overflow: auto;
+  font-size: 13px;
+  line-height: 1.6;
+  max-height: 520px;
+
+  code {
+    background: transparent;
+    color: inherit;
+    font-family: inherit;
+    padding: 0;
+    border-radius: 0;
+    white-space: pre;
+  }
+}
+
+/* ============================================================
+   레슨 라이브 데모용 공통 UI 유틸 (study- 접두사)
+   - 데모 컴포넌트들이 일관된 모양을 갖도록 최소한의 스타일만 제공.
+   ============================================================ */
+
+.study-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.study-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.study-h4 {
+  font-size: 18px;
+  font-weight: 500;
+  margin: 0;
+}
+
+.study-h5 {
+  font-size: 13px;
+  font-family: var(--font-mono);
+  color: var(--muted);
+  margin: 0 0 6px;
+  letter-spacing: 0.04em;
+}
+
+.study-hr {
+  border: 0;
+  border-top: 1px dashed var(--border);
+  margin: 6px 0;
+  width: 100%;
+}
+
+.study-muted {
+  color: var(--muted);
+  font-size: 14px;
+  margin: 0;
+}
+
+.study-banner {
+  margin: 0;
+  padding: 10px 14px;
+  font-size: 14px;
+  border-radius: 0;
+
+  &--ok {
+    background: rgba(34, 197, 94, 0.12);
+    color: #15803d;
+    border: 1px solid rgba(34, 197, 94, 0.35);
+  }
+}
+
+body[data-theme="dark"] .study-banner--ok {
+  color: #4ade80;
+}
+
+.study-btn {
+  padding: 8px 16px;
+  font-size: 14px;
+  background: var(--btn-bg);
+  color: var(--btn-text);
+  border: 1px solid var(--btn-bg);
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+
+  &:hover {
+    background: var(--btn-bg-hover);
+    border-color: var(--btn-bg-hover);
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  &--ghost {
+    background: transparent;
+    color: var(--text);
+    border-color: var(--muted);
+
+    &:hover {
+      background: var(--chip-bg);
+      color: var(--text);
+      border-color: var(--text);
+    }
+  }
+}
+
+.study-input {
+  padding: 8px 12px;
+  font-size: 14px;
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border);
+  font-family: inherit;
+  min-width: 0;
+  width: 100%;
+
+  &:focus {
+    outline: none;
+    border-color: var(--text);
+  }
+}
+
+.study-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 13px;
+  color: var(--muted);
+
+  &--row {
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    color: var(--text);
+  }
+}
+
+.study-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  &__item {
+    padding: 6px 0;
+    border-bottom: 1px dashed var(--border);
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  &--plain {
+    list-style: disc;
+    padding-left: 20px;
+
+    li {
+      font-size: 14px;
+      line-height: 1.8;
+      color: var(--text);
+
+      code {
+        background: var(--chip-bg);
+        padding: 1px 6px;
+        border-radius: 3px;
+        font-family: var(--font-mono);
+        font-size: 12.5px;
+      }
+
+      em {
+        color: var(--muted);
+        font-style: normal;
+      }
+    }
+  }
+}
+
+.study-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+  font-family: var(--font-mono);
+
+  th,
+  td {
+    text-align: left;
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  th {
+    color: var(--muted);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.05em;
+  }
+
+  code {
+    background: var(--chip-bg);
+    padding: 1px 6px;
+    border-radius: 3px;
+  }
+}
+
+.study-pre {
+  margin: 0;
+  padding: 12px 14px;
+  font-size: 12.5px;
+  font-family: var(--font-mono);
+  background: var(--chip-bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+  overflow: auto;
+}
+
+.study-card {
+  /* Sass 데모용 — 실제 스타일은 각 데모의 .scss 가 담당 */
+}
+
+.study-card-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 6px 0;
+}
