@@ -150,6 +150,8 @@ function ProjectDetail({ projectId, filters }: ProjectDetailProps) {
                         src={img.src}
                         alt={`TOP50 ${img.label}`}
                         width={300}
+                        loading="lazy"
+                        decoding="async"
                         className="project-detail__gallery-img"
                       />
                     </button>

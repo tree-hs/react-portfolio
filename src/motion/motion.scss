@@ -20,3 +20,17 @@
   position: relative;
   white-space: pre; // 단어 끝 공백 보존(겹침 방지)
 }
+
+// ── 접근성 안전망 ───────────────────────────────────────────────────────────
+//  "동작 줄이기"를 켠 사용자에게는 CSS 트랜지션/애니메이션까지 사실상 끈다.
+//  (JS 모션은 각 컴포넌트가 useReducedMotion 으로 이미 처리. 이건 CSS 측 백업.)
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
