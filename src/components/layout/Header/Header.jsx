@@ -1,8 +1,12 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import { useLenis } from "lenis/react";
 import HeaderTheme from "./HeaderTheme";
 import "./Header.scss";
+
+// 헤더 높이만큼 위 여백을 두고 멈추기 위한 오프셋(px). --header-h 와 맞춤.
+const SCROLL_OFFSET = 90;
 
 // path가 "#..." 이면 같은 페이지 내 스크롤(앵커), "/..." 이면 라우터 이동(<Link>).
 const navItems = [
@@ -17,6 +21,9 @@ function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
+  // Lenis 인스턴스(스무스 스크롤). 동작 줄이기 선호 시 SmoothScroll이 Lenis를
+  // 마운트하지 않으므로 null → 아래에서 네이티브 scrollTo로 폴백.
+  const lenis = useLenis();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -41,10 +48,15 @@ function Header() {
     if (!hash) return;
     const element = document.getElementById(hash);
     if (!element) return;
-    const headerOffset = 80;
-    const offsetPosition =
-      element.getBoundingClientRect().top + window.pageYOffset - headerOffset;
-    window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+
+    // Lenis가 있으면 관성 스크롤로(offset 만큼 위에서 멈춤), 없으면 네이티브 폴백
+    if (lenis) {
+      lenis.scrollTo(element, { offset: -SCROLL_OFFSET });
+    } else {
+      const top =
+        element.getBoundingClientRect().top + window.pageYOffset - SCROLL_OFFSET;
+      window.scrollTo({ top, behavior: "smooth" });
+    }
   };
 
   // 메뉴 항목 렌더 — 앵커/라우트 분기. onNavigate 로 모바일에서 클릭 시 닫기.
