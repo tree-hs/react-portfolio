@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 import { fetchProjectDetail } from "@/api/projects";
 import { Project } from "@/types/project";
 import { FilterState } from "@/components/Filters/Filters";
@@ -52,8 +53,6 @@ function ProjectDetail({ projectId, filters }: ProjectDetailProps) {
     };
   }, [filters, projectId]);
 
-  if (!projectId) return null;
-
   const handleClose = () => {
     navigate({ pathname: "/", search: location.search }, { replace: true });
   };
@@ -62,11 +61,51 @@ function ProjectDetail({ projectId, filters }: ProjectDetailProps) {
     if (e.target === e.currentTarget) setLightboxImage(null);
   };
 
+  // ESC 닫기(라이트박스 우선) + 모달 열린 동안 배경 스크롤 잠금 (a11y/UX)
+  useEffect(() => {
+    if (!projectId) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== "Escape") return;
+      if (lightboxImage) setLightboxImage(null);
+      else handleClose();
+    };
+    document.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [projectId, lightboxImage]);
+
+  const EASE = [0.22, 1, 0.36, 1] as const;
+
   return (
-    <div className="project-detail__overlay" role="dialog" aria-modal="true">
-      <div className="project-detail">
+    <AnimatePresence>
+      {projectId && (
+        <motion.div
+          className="project-detail__overlay"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="project-detail-title"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) handleClose();
+          }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          <motion.div
+            className="project-detail"
+            onClick={(e) => e.stopPropagation()}
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 24 }}
+            transition={{ duration: 0.4, ease: EASE }}
+          >
         <div className="project-detail__header">
-          <h3>Project Details</h3>
+          <h3 id="project-detail-title">Project Details</h3>
           <button
             type="button"
             onClick={handleClose}
@@ -160,26 +199,28 @@ function ProjectDetail({ projectId, filters }: ProjectDetailProps) {
               </section>
             ) : null}
           </>
-        ) : null}
-      </div>
+            ) : null}
+          </motion.div>
 
-      {lightboxImage ? (
-        <div
-          className="project-detail__lightbox-overlay"
-          onClick={handleLightboxBackdropClick}
-          role="dialog"
-          aria-modal="true"
-          aria-label="이미지 확대 보기"
-        >
-          <img
-            src={lightboxImage}
-            alt="확대 보기"
-            className="project-detail__lightbox-image"
-            onClick={(e) => e.stopPropagation()}
-          />
-        </div>
-      ) : null}
-    </div>
+          {lightboxImage ? (
+            <div
+              className="project-detail__lightbox-overlay"
+              onClick={handleLightboxBackdropClick}
+              role="dialog"
+              aria-modal="true"
+              aria-label="이미지 확대 보기"
+            >
+              <img
+                src={lightboxImage}
+                alt="확대 보기"
+                className="project-detail__lightbox-image"
+                onClick={(e) => e.stopPropagation()}
+              />
+            </div>
+          ) : null}
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }
 
