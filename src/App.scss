@@ -225,10 +225,11 @@ button {
   font-size: 14px;
   cursor: pointer;
   color: var(--chip-text);
-  transition: all 0.2s ease;
-  
+  transition: all var(--dur-fast) var(--ease-out-expo);
+
   &:hover {
-    border-color: var(--text);
+    border-color: var(--brand);
+    color: var(--text);
   }
 }
 
@@ -237,19 +238,6 @@ button {
   color: var(--chip-active-text);
   border-color: var(--text);
   font-weight: 500;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
 }
 
 .main {
@@ -489,15 +477,15 @@ section {
 }
 
 .filters__reset {
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--border);
   border-radius: 0;
   padding: 8px 16px;
   background: transparent;
   color: var(--text);
   font-size: 14px;
   cursor: pointer;
-  transition: all 0.2s ease;
-  
+  transition: all var(--dur-fast) var(--ease-out-expo);
+
   &:hover {
     border-color: var(--text);
     background: var(--text);
@@ -535,15 +523,20 @@ section {
 .filters select {
   padding: 10px 15px;
   border-radius: 0;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  background: transparent;
+  border: 1px solid var(--border);
+  background: var(--surface);
   color: var(--text);
   font-size: 14px;
   cursor: pointer;
-  transition: all 0.2s ease;
-  
+  transition: all var(--dur-fast) var(--ease-out-expo);
+
+  option {
+    background: var(--surface);
+    color: var(--text);
+  }
+
   &:hover {
-    border-color: var(--text);
+    border-color: var(--brand);
   }
   
   &:focus {

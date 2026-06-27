@@ -5,6 +5,7 @@ import {
   STACK_OPTIONS,
 } from "../../api/projects";
 import type { Project, ProjectQueryParams, Skill } from "../../types/project";
+import { AnimatedText } from "../../motion";
 
 export interface FilterState {
   stack: Skill | "All";
@@ -69,12 +70,11 @@ function Filters({ filters, onChange, projects }: FiltersProps) {
   };
 
   return (
-    <section id="projects" className="projects-section">
       <div className="filters">
 
         <div className="filters__group">
           <div className="filters__header">
-            <h2 className="section__title">Stack</h2>
+            <AnimatedText as="h2" className="section__title" text="Stack" />
             <button className="filters__reset" type="button" onClick={handleReset}>
                 Reset
             </button>
@@ -148,7 +148,6 @@ function Filters({ filters, onChange, projects }: FiltersProps) {
           </div>
         </div>
       </div>
-    </section>
   );
 }
 

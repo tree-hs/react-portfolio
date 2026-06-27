@@ -4,16 +4,20 @@
   left: 0;
   right: 0;
   z-index: 1000;
-  backdrop-filter: blur(10px);
-  transition: all 0.3s ease;
   padding: 0 50px;
-  
+  background: color-mix(in srgb, var(--bg) 55%, transparent);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid transparent;
+  transition: background var(--dur-fast) var(--ease-out-expo),
+    border-color var(--dur-fast) var(--ease-out-expo);
+
   @media (max-width: 768px) {
     padding: 0 25px;
   }
 
   &--scrolled {
-    box-shadow: 0 10px 30px -10px rgba(2, 12, 27, 0.7);
+    background: color-mix(in srgb, var(--bg) 80%, transparent);
+    border-bottom-color: var(--border);
   }
 }
 
@@ -23,78 +27,73 @@
   align-items: center;
   max-width: 1400px;
   margin: 0 auto;
-  padding: 0;
-  height: 70px;
-  
-  @media (max-width: 768px) {
-    height: 60px;
-  }
-}
+  height: var(--header-h);
 
-.header__logo {
-  display: flex;
-  align-items: center;
+  @media (max-width: 768px) {
+    height: 64px;
+  }
 }
 
 .header__logo-link {
   display: flex;
   align-items: center;
   color: var(--text);
-  font-size: 20px;
-  font-weight: 500;
   text-decoration: none;
-  transition: opacity 0.3s ease;
-  
+  transition: opacity var(--dur-fast) var(--ease-out-expo);
+
   &:hover {
     opacity: 0.7;
   }
 }
 
 .header__logo-text {
-  font-size:40px;
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
 }
 
 .header__menu {
   display: flex;
   align-items: center;
-  gap: 32px;
+  gap: 36px;
   list-style: none;
   margin: 0;
   padding: 0;
-  
+
   @media (max-width: 768px) {
     display: none;
   }
 }
 
-.header__menu-item {
-  margin: 0;
-}
-
 .header__menu-link {
-  display: flex;
-  align-items: center;
-  gap: 5px;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
   color: var(--text);
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 400;
   text-decoration: none;
-  transition: opacity 0.2s ease;
-  padding: 10px 0;
-  
+  padding: 8px 0;
+  transition: color var(--dur-fast) var(--ease-out-expo);
+
   &:hover {
-    opacity: 0.7;
+    color: var(--brand);
   }
 }
 
+// 메뉴 번호 — 모노 폰트로 작게 (olivierlarose 류 디테일)
 .header__menu-number {
-  display: none;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--brand);
+  letter-spacing: 0;
 }
 
 .header__actions {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 18px;
 }
 
 header {
@@ -102,7 +101,7 @@ header {
     display: flex;
     gap: 10px;
     align-items: center;
-    
+
     label {
       display: flex;
       align-items: center;
@@ -110,18 +109,98 @@ header {
       cursor: pointer;
       color: var(--muted-light);
       font-size: 13px;
-      font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', monospace;
-      transition: color 0.2s ease;
-      
+      font-family: var(--font-mono);
+      transition: color var(--dur-fast) var(--ease-out-expo);
+
       &:hover {
         color: var(--accent);
       }
     }
-    
+
     input[type="checkbox"] {
       cursor: pointer;
       width: 18px;
       height: 18px;
+      accent-color: var(--brand);
     }
+  }
+}
+
+// ── 햄버거 버튼 (모바일 전용) ────────────────────────────────────────────────
+.header__burger {
+  display: none;
+  position: relative;
+  width: 28px;
+  height: 20px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+
+  @media (max-width: 768px) {
+    display: block;
+  }
+
+  span {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--text);
+    transition: transform var(--dur-fast) var(--ease-out-expo),
+      opacity var(--dur-fast) var(--ease-out-expo);
+
+    &:nth-child(1) {
+      top: 4px;
+    }
+    &:nth-child(2) {
+      bottom: 4px;
+    }
+  }
+
+  &.is-open span:nth-child(1) {
+    top: 9px;
+    transform: rotate(45deg);
+  }
+  &.is-open span:nth-child(2) {
+    bottom: 9px;
+    transform: rotate(-45deg);
+  }
+}
+
+// ── 모바일 풀스크린 메뉴 ─────────────────────────────────────────────────────
+.header__mobile {
+  position: fixed;
+  inset: 0;
+  top: 64px;
+  z-index: 999;
+  background: var(--bg);
+  display: none;
+
+  @media (max-width: 768px) {
+    display: block;
+  }
+}
+
+.header__mobile-menu {
+  list-style: none;
+  margin: 0;
+  padding: 40px 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.header__mobile-item {
+  border-bottom: 1px solid var(--border);
+
+  .header__menu-link {
+    font-family: var(--font-display);
+    font-size: 32px;
+    padding: 20px 0;
+    width: 100%;
+  }
+  .header__menu-number {
+    font-size: 14px;
   }
 }
