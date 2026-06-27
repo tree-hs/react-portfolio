@@ -1,0 +1,32 @@
+@use "sass:math";
+@use "sass:color";
+
+@function rem($px, $base: 16) {
+  @return math.div($px, $base) * 1rem;
+}
+
+@function space($step) {
+  @return $step * 4px;
+}
+
+$brand: #2563eb;
+
+.sass-fn-demo {
+  padding: space(4) space(6);     // 16px 24px
+  font-size: rem(18);              // 1.125rem
+  border-radius: rem(8);           // 0.5rem
+  border: 2px solid color.adjust($brand, $lightness: -10%);
+  background: color.adjust($brand, $lightness: 45%);
+  color: color.adjust($brand, $lightness: -20%);
+  font-family: "SF Mono", "Monaco", monospace;
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
+    padding: space(1) 0;
+  }
+
+  &__row + &__row {
+    border-top: 1px dashed rgba(0, 0, 0, 0.15);
+  }
+}

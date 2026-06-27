@@ -57,6 +57,58 @@ export const githubUrl = (sourcePath: string) => GITHUB_BASE + sourcePath;
 
 export const demos: DemoMeta[] = [
   {
+    id: "raw-webgl-triangle",
+    no: "02",
+    title: "Raw WebGL — 삼각형 1개를 손으로",
+    summary:
+      "라이브러리 없이 <canvas> + WebGL API만으로 회전하는 무지개 삼각형. 셰이더 컴파일/링크/VBO/attribute/uniform/drawArrays 전 과정을 직접 — Three.js가 자동화해주는 일들을 한 번 풀어본다.",
+    tags: ["WebGL", "GLSL", "draw call", "no library"],
+    requirements: ["C"],
+    phase: 1,
+    status: "done",
+    sourcePath: "src/lab/demos/02-raw-webgl-triangle/RawTriangle.tsx",
+    Component: lazy(() => import("./demos/02-raw-webgl-triangle/RawTriangle")),
+    whatItDoes:
+      "WebGLRenderingContext 를 직접 받아 vertex/fragment 셰이더(GLSL 문자열)를 컴파일하고, GPU 메모리에 꼭짓점 데이터를 업로드한 뒤, 매 프레임 drawArrays 한 번으로 삼각형을 그립니다. 오버레이에 FPS / 초당 draw call 수 / 꼭짓점 수가 떠서 'draw call 1번이 화면 한 장에 어떻게 대응되는지'를 눈으로 확인할 수 있어요.",
+    concepts: [
+      {
+        term: "WebGLRenderingContext (gl)",
+        desc: "canvas.getContext('webgl')로 얻는 저수준 API. 'createShader / bindBuffer / drawArrays …' 같은 명령들로 GPU를 직접 지시. Three.js는 이걸 감싸 'Scene/Camera/Mesh' 추상화를 제공.",
+      },
+      {
+        term: "GLSL 셰이더 (vertex / fragment)",
+        desc: "GPU에서 돌아가는 작은 프로그램. vertex shader는 꼭짓점마다 1번 실행돼 gl_Position을 정하고, fragment shader는 픽셀마다 1번 실행돼 gl_FragColor를 정함. varying으로 vertex→fragment 보간.",
+      },
+      {
+        term: "VBO (Vertex Buffer Object)",
+        desc: "꼭짓점 데이터를 GPU 메모리에 올린 덩어리. createBuffer → bindBuffer → bufferData. 한 번 올려두면 매 프레임 재업로드 불필요.",
+      },
+      {
+        term: "attribute (per-vertex) vs uniform (per-draw)",
+        desc: "attribute는 꼭짓점마다 다른 값(위치·색…), uniform은 한 draw call 동안 모든 꼭짓점이 공유하는 값(시간·행렬·색 보정 등). vertexAttribPointer로 attribute와 VBO를 연결.",
+      },
+      {
+        term: "Draw call (drawArrays / drawElements)",
+        desc: "GPU에게 '지금까지 셋팅한 걸로 그려!' 명령 1회. 이 데모는 매 프레임 drawArrays 1번 = 1 draw call. Three.js에서는 보통 mesh 1개 = draw call 1번. Phase 3에서 이 비용을 깊게 다룸.",
+      },
+      {
+        term: "Clip space (-1..1)",
+        desc: "vertex shader 최종 출력(gl_Position)의 좌표계. 캔버스 한가운데가 (0,0,0,1), 사방 ±1. 카메라/원근/모델 행렬을 *곱한 결과*가 여기로 와야 화면에 보임.",
+      },
+      {
+        term: "WebGL의 current-state 모델",
+        desc: "bindBuffer / useProgram 같은 호출은 '지금 활성화된 무엇'을 바꾸고, 이후 호출은 그 기준으로 동작. 잊으면 silent bug. 그래서 매 프레임 같은 순서로 다시 묶어주는 게 안전.",
+      },
+    ],
+    learned: [
+      "셰이더 컴파일 실패는 getShaderInfoLog로 직접 꺼내야 보인다 — 안 하면 그냥 검정 화면. → 항상 에러 로그를 throw하는 헬퍼로 감쌌다.",
+      "WebGL 1 fragment shader는 'precision mediump float;'를 빼먹으면 컴파일 자체가 안 됨.",
+      "캔버스 CSS 크기와 picture 픽셀 크기(canvas.width/height)는 별개. devicePixelRatio 곱하고 gl.viewport도 같이 갱신해야 레티나에서 선명.",
+      "Three.js의 renderer.render() 한 줄 = 여기 코드의 (a)~(g) 단계를 매 mesh마다 자동으로 + frustum culling + depth test + 정렬 + 행렬 자동 계산까지. 자세히는 docs/RENDERER_NOTES.md.",
+      "dispose 빼먹으면 GPU 자원 누적 — gl.deleteBuffer/deleteProgram/deleteShader 를 언마운트 cleanup에 명시했음. Three.js에서도 같은 책임(.dispose()) — Phase 3 핵심 주제 중 하나.",
+    ],
+  },
+  {
     id: "r3f-hello",
     no: "01",
     title: "Hello R3F — 회전하는 큐브",

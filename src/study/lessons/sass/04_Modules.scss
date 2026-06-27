@@ -1,0 +1,24 @@
+@use "./tokens" as t;
+@use "sass:math";
+
+// mixin 정의 — 같은 파일 안에서 사용
+@mixin card {
+  border: 2px solid t.$primary;
+  border-radius: t.$radius;
+  padding: 16px;
+  background: rgba(t.$primary, 0.06);
+}
+
+.sass-module-demo {
+  @include card;
+  color: t.$primary;
+  font-family: "SF Mono", "Monaco", monospace;
+  font-size: 14px;
+  line-height: 1.7;
+
+  code {
+    background: rgba(0, 0, 0, 0.08);
+    padding: 1px 6px;
+    border-radius: 3px;
+  }
+}
