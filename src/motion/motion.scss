@@ -1,0 +1,22 @@
+// ─────────────────────────────────────────────────────────────────────────────
+//  motion.scss — 모션 컴포넌트 지원 스타일 (구조용 최소 CSS만)
+//  · 색·폰트 같은 디자인 토큰은 다음 단계(토큰 재정의)에서. 여기선 "마스크/배치"만.
+// ─────────────────────────────────────────────────────────────────────────────
+
+// AnimatedText — 단어 마스크. overflow:hidden 으로 솟아오르기 전 단어를 가린다.
+.anim-text__mask {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top; // 마스크 높이가 줄간격에 영향 주지 않게
+}
+.anim-text__word {
+  display: inline-block;
+  will-change: transform;
+}
+
+// ScrollRevealParagraph — 단어 단위 줄바꿈 자연스럽게
+.reveal-word {
+  display: inline-block;
+  position: relative;
+  white-space: pre; // 단어 끝 공백 보존(겹침 방지)
+}

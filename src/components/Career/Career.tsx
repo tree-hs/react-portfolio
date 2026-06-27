@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState, useRef } from "react";
 import { fetchCompanies } from "../../api/companys";
 import type { CompanyCareer } from "../../types/companys";
+import { AnimatedText, Reveal } from "../../motion";
 
 export default function Career() {
   // ✅ select에서 사용할 선택값 (전체/연도)
@@ -96,7 +97,7 @@ export default function Career() {
     <section id="experience" className="experience-section">
       <div className="experience__container" ref={containerRef}>
         <div className="experience__tabs" ref={tabsRef}>
-          <h2 className="section__title">Worked</h2>
+          <AnimatedText as="h2" className="section__title" text="Worked" />
           <select
             className="experience__select"
             name="period"
@@ -118,7 +119,12 @@ export default function Career() {
 
         <div className="experience__content" ref={contentRef}>
           {companyList.map((c, idx) => (
-            <div key={c.id} className="experience__item">
+            <Reveal
+              key={c.id}
+              className="experience__item"
+              delay={Math.min(idx * 0.05, 0.3)}
+              y={32}
+            >
               <div className="experience__header">
                 <h3 className="experience__title">
                   <span>{c.position}</span>
@@ -128,16 +134,26 @@ export default function Career() {
                   {c.period.start} — {c.period.end}
                 </p>
               </div>
-              <p className="experience__team">{c.team}</p>
-              <p className="experience__description">{c.highlights}</p>
-              <div className="experience__tech">
-                {c.techStack.map((t) => (
-                  <span key={`${c.id}-${t}`} className="experience__tech-item">
-                    {t}
-                  </span>
+              {(c.team || c.employmentType) && (
+                <p className="experience__team">
+                  {[c.employmentType, c.team].filter(Boolean).join(" · ")}
+                </p>
+              )}
+              <ul className="experience__highlights">
+                {c.highlights.map((h, i) => (
+                  <li key={i}>{h}</li>
                 ))}
-              </div>
-            </div>
+              </ul>
+              {c.techStack.length > 0 && (
+                <div className="experience__tech">
+                  {c.techStack.map((t) => (
+                    <span key={`${c.id}-${t}`} className="experience__tech-item">
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </Reveal>
           ))}
         </div>
       </div>

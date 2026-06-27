@@ -32,12 +32,17 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 // 우리 앱의 최상위 컴포넌트. App.tsx가 'export default App' 하므로 default import (중괄호 없음).
 import App from "./App";
+// 부드러운 스크롤(Lenis) — 사이트 전역 감성. 권장 기본 CSS도 함께.
+import SmoothScroll from "./motion/SmoothScroll";
+import "lenis/dist/lenis.css";
+import "./motion/motion.scss";
 
-// 페이지가 처음 뜰 때 <body>에 data-theme 속성이 아직 없으면 "light"로 박아둔다.
-// → CSS의 body[data-theme="light"] 규칙이 즉시 적용돼서, 다크모드 토글(HeaderTheme) 코드가
-//   실행되기 전 잠깐 색이 깜빡이는 현상(FOUC)을 줄인다.
+// 페이지가 처음 뜰 때 <body>에 data-theme 속성이 아직 없으면 "dark"로 박아둔다.
+// → 크리에이티브 방향 = 다크 기본. CSS의 body[data-theme="dark"] 규칙이 즉시 적용돼
+//   다크모드 토글(HeaderTheme) 코드가 실행되기 전 잠깐 색이 깜빡이는 현상(FOUC)을 줄인다.
+//   (HeaderTheme가 마운트되며 localStorage 저장값/OS 설정으로 최종 보정)
 if (!document.body.getAttribute("data-theme")) {
-  document.body.setAttribute("data-theme", "light");
+  document.body.setAttribute("data-theme", "dark");
 }
 
 // index.html의 <div id="root">를 찾아 React 렌더 루트를 만든다.
@@ -76,8 +81,12 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         (같은 이유로 JSON fetch도 `${import.meta.env.BASE_URL}projects.json` 으로 함)
     ───────────────────────────────────────────────────────────────────────────── */}
     <BrowserRouter basename={import.meta.env.BASE_URL}>
-      {/* 실제 우리 앱. 이 안에서만 <Routes>, <Link>, useNavigate 등 라우터 기능을 쓸 수 있다. */}
-      <App />
+      {/* SmoothScroll — Lenis 관성 스크롤로 앱 전체를 감싼다.
+          (동작 줄이기 선호 사용자에겐 자동으로 비활성화) */}
+      <SmoothScroll>
+        {/* 실제 우리 앱. 이 안에서만 <Routes>, <Link>, useNavigate 등 라우터 기능을 쓸 수 있다. */}
+        <App />
+      </SmoothScroll>
     </BrowserRouter>
   </React.StrictMode>
 );

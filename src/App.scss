@@ -1,159 +1,150 @@
 /* =========================
-  1) Base - Ben Celinski inspired
+  1) Design tokens — Creative / WebGL 방향
+  · 다크를 기본(primary), 라이트는 대체 테마. 둘 다 정제된 중립 팔레트 + 단일 브랜드 포인트.
+  · 색/타이포/모션/레이아웃 토큰을 한 곳에서. 컴포넌트가 쓰던 토큰 이름은 그대로 유지.
 ========================= */
 :root {
-  font-family: 'Do Hyeon', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  /* ---- Typography ---- */
+  --font-display: "Space Grotesk", "Pretendard Variable", Pretendard, system-ui, sans-serif;
+  --font-sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+
+  /* ---- Motion (모션 컴포넌트와 공유하는 커브/속도) ---- */
+  --ease-out-expo: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 0.3s;
+  --dur: 0.6s;
+  --dur-slow: 1s;
+
+  /* ---- Layout ---- */
+  --header-h: 90px; /* 흩어져 있던 헤더 높이 매직넘버 통일 */
+
+  font-family: var(--font-sans);
   line-height: 1.6;
   font-weight: 400;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  /* 기본값은 라이트 모드 */
-  color-scheme: light;
+  /* 기본 테마 = 다크 */
+  color-scheme: dark;
 
-  /* ---- theme tokens (CSS Variables) - Ben Celinski inspired ---- */
-  --bg: #ffffff;
-  --text: #1a1a1a;
-  --muted: #666666;
-  --muted-light: #999999;
+  /* ---- Semantic color tokens (기본=다크) ---- */
+  --bg: #0a0a0c;
+  --surface: #141419;
+  --surface-2: #1e1e25;
+  --text: #f2f2f0;
+  --muted: #8d8d96;
+  --muted-light: #c2c2cb;
+  --border: rgba(255, 255, 255, 0.1);
 
-  --link: #000000;
-  --link-hover: #333333;
+  --link: #f2f2f0;
+  --link-hover: #ffffff;
 
-  --btn-bg: #000000;
-  --btn-bg-hover: #333333;
-  --btn-text: #ffffff;
+  --btn-bg: #f2f2f0;
+  --btn-bg-hover: #ffffff;
+  --btn-text: #0a0a0c;
 
-  /* skill chip */
-  --chip-bg: #f5f5f5;
-  --chip-text: #666666;
-  --chip-active-bg: #000000;
-  --chip-active-text: #ffffff;
-  
-  /* accent colors */
-  --accent: #000000;
-  --accent-hover: #333333;
-  
-  /* overlay */
-  --overlay-bg: rgba(0, 0, 0, 0.85);
-}
+  --chip-bg: #1a1a20;
+  --chip-text: #b5b5bd;
+  --chip-active-bg: #f2f2f0;
+  --chip-active-text: #0a0a0c;
 
-/* light */
-body[data-theme="light"] {
-  color-scheme: light;
+  /* accent = 중립 강조(컴포넌트가 기대하는 의미 유지) */
+  --accent: #f2f2f0;
+  --accent-hover: #ffffff;
 
-  --bg: #ffffff;
-  --text: #1a1a1a;
-  --muted: #666666;
-  --muted-light: #999999;
+  /* brand = 단일 비비드 포인트(링크 밑줄·포커스·하이라이트용, 신규 토큰) */
+  --brand: #5b8cff;
+  --brand-hover: #82a6ff;
 
-  --link: #000000;
-  --link-hover: #333333;
-
-  --btn-bg: #000000;
-  --btn-bg-hover: #333333;
-  --btn-text: #ffffff;
-
-  --chip-bg: #f5f5f5;
-  --chip-text: #666666;
-  --chip-active-bg: #000000;
-  --chip-active-text: #ffffff;
-  
-  --accent: #000000;
-  --accent-hover: #333333;
-  
-  /* overlay */
-  --overlay-bg: rgba(0, 0, 0, 0.85);
+  --overlay-bg: rgba(0, 0, 0, 0.92);
 }
 
 /* 실제 적용 */
 body {
   background-color: var(--bg);
   color: var(--text);
-  transition: background 0.3s ease, color 0.3s ease;
+  transition: background var(--dur-fast) ease, color var(--dur-fast) ease;
+  font-family: var(--font-sans);
   font-size: 16px;
   line-height: 1.6;
   font-weight: 400;
 }
 
-* {
-  scroll-behavior: smooth;
+/* 제목류는 디스플레이 폰트 */
+h1, h2, h3, h4, h5, h6,
+.section__title {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
 }
 
 /* =========================
   2) Theme overrides
 ========================= */
 
-/* light */
-body[data-theme="light"] {
-  color-scheme: light;
-
-  --bg: #ffffff;
-  --text: #1a1a1a;
-  --muted: #666666;
-  --muted-light: #999999;
-
-  --link: #000000;
-  --link-hover: #333333;
-
-  --btn-bg: #000000;
-  --btn-bg-hover: #333333;
-  --btn-text: #ffffff;
-
-  --chip-bg: #f5f5f5;
-  --chip-text: #666666;
-  --chip-active-bg: #000000;
-  --chip-active-text: #ffffff;
-  
-  --accent: #000000;
-  --accent-hover: #333333;
-}
-
-/* dark (명시적으로도 지원) */
+/* dark (명시) — 기본값과 동일 */
 body[data-theme="dark"] {
   color-scheme: dark;
 
-  --bg: #0a0a0a;
-  --text: #ffffff;
-  --muted: #999999;
-  --muted-light: #cccccc;
+  --bg: #0a0a0c;
+  --surface: #141419;
+  --surface-2: #1e1e25;
+  --text: #f2f2f0;
+  --muted: #8d8d96;
+  --muted-light: #c2c2cb;
+  --border: rgba(255, 255, 255, 0.1);
 
-  --link: #ffffff;
-  --link-hover: #cccccc;
+  --link: #f2f2f0;
+  --link-hover: #ffffff;
 
-  --btn-bg: #ffffff;
-  --btn-bg-hover: #cccccc;
-  --btn-text: #000000;
+  --btn-bg: #f2f2f0;
+  --btn-bg-hover: #ffffff;
+  --btn-text: #0a0a0c;
 
-  --chip-bg: #1a1a1a;
-  --chip-text: #999999;
-  --chip-active-bg: #ffffff;
-  --chip-active-text: #000000;
-  
-  --accent: #ffffff;
-  --accent-hover: #cccccc;
-  
-  /* overlay */
-  --overlay-bg: rgba(0, 0, 0, 0.9);
+  --chip-bg: #1a1a20;
+  --chip-text: #b5b5bd;
+  --chip-active-bg: #f2f2f0;
+  --chip-active-text: #0a0a0c;
+
+  --accent: #f2f2f0;
+  --accent-hover: #ffffff;
+  --brand: #5b8cff;
+  --brand-hover: #82a6ff;
+
+  --overlay-bg: rgba(0, 0, 0, 0.92);
 }
 
-/* (선택) data-theme가 아직 없을 때는 OS 테마 따라가기 */
-@media (prefers-color-scheme: light) {
-  body:not([data-theme]) {
-    color-scheme: light;
-    --bg: #ffffff;
-    --text: #213547;
-    --link-hover: #747bff;
-    --btn-bg: #f9f9f9;
+/* light — 정제된 웜 오프화이트 대체 테마 */
+body[data-theme="light"] {
+  color-scheme: light;
 
-    --chip-bg: #f5f6f8;
-    --chip-text: #222;
-    --chip-active-bg: #e0ecff;
-    --chip-active-text: #1f4fff;
-  }
+  --bg: #f6f5f2;
+  --surface: #ffffff;
+  --surface-2: #efede9;
+  --text: #15151a;
+  --muted: #6a6a72;
+  --muted-light: #9a9aa2;
+  --border: rgba(0, 0, 0, 0.1);
+
+  --link: #15151a;
+  --link-hover: #000000;
+
+  --btn-bg: #15151a;
+  --btn-bg-hover: #000000;
+  --btn-text: #ffffff;
+
+  --chip-bg: #ecebe7;
+  --chip-text: #6a6a72;
+  --chip-active-bg: #15151a;
+  --chip-active-text: #ffffff;
+
+  --accent: #15151a;
+  --accent-hover: #000000;
+  --brand: #2f5bff;
+  --brand-hover: #5b80ff;
+
+  --overlay-bg: rgba(0, 0, 0, 0.85);
 }
 
 #root {
@@ -227,7 +218,7 @@ button {
 }
 /* skill-chip 기존 스타일을 변수로 전환 */
 .skill-chip {
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--border);
   padding: 8px 16px;
   border-radius: 0;
   background: var(--chip-bg);
@@ -318,6 +309,20 @@ button {
   font-size: 32px;
   @media (max-width: 768px) {
     font-size: 20px;
+  }
+}
+
+/* About 소개 문단 — 스크롤 따라 단어별로 또렷해지는 ScrollRevealParagraph 용 */
+.about__intro {
+  max-width: 720px;
+  margin: 0 0 64px;
+  font-size: clamp(20px, 3vw, 34px);
+  line-height: 1.5;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: var(--text);
+  @media (max-width: 768px) {
+    margin-bottom: 40px;
   }
 }
 
@@ -432,11 +437,19 @@ section {
   margin: 5px 0 15px;
 }
 
-.experience__description {
-  font-size: 16px;
-  line-height: 1.8;
-  color: var(--text);
+.experience__highlights {
+  list-style: none;
   margin: 0 0 20px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  li {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--muted-light);
+  }
 }
 
 .experience__tech {
@@ -451,7 +464,7 @@ section {
   background: var(--chip-bg);
   font-size: 13px;
   color: var(--chip-text);
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--border);
 }
 
 
@@ -680,23 +693,26 @@ section {
 .project-card {
   border-radius: 0;
   padding: 30px;
-  background: var(--bg);
-  border: 1px solid var(--muted);
-  transition: all 0.3s ease;
-  
+  background: var(--surface);
+  border: 1px solid var(--border);
+  transition: border-color var(--dur-fast) var(--ease-out-expo),
+    transform var(--dur-fast) var(--ease-out-expo),
+    box-shadow var(--dur-fast) var(--ease-out-expo);
+  height: 100%;
+
   @media (max-width: 768px) {
     padding: 20px;
   }
-  
+
   &:hover {
-    border-color: var(--text);
+    border-color: var(--brand);
     transform: translateY(-4px);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
   }
 }
 
 .project-card--active {
-  border-color: var(--text);
+  border-color: var(--brand);
 }
 
 .project-card__header {
@@ -761,7 +777,7 @@ section {
   font-size: 13px;
   color: var(--chip-text);
   transition: all 0.2s ease;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--border);
   
   &:hover {
     background: var(--chip-active-bg);
@@ -820,7 +836,7 @@ section {
   padding: 40px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
   position: relative;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--border);
   animation: slideUp 0.3s ease;
   max-height: 90vh;
   overflow-y: auto;

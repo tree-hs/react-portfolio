@@ -12,6 +12,7 @@ import {
   DURATION_OPTIONS,
   STACK_OPTIONS,
 } from "./api/projects";
+import { AnimatedText, Reveal, ScrollRevealParagraph } from "./motion";
 import "./styles/reset.scss";
 import "./styles/template.scss";
 import "./App.scss";
@@ -20,6 +21,10 @@ import "./App.scss";
 // React.lazy + dynamic import 로 코드 스플리팅 (LabPage / LabDemoPage 와 각 데모는 별도 chunk).
 const LabPage = lazy(() => import("./lab/LabPage"));
 const LabDemoPage = lazy(() => import("./lab/LabDemoPage"));
+const TestLabPage = lazy(() => import("./testLab/testLabPage"));
+const TestLabDemoPage = lazy(() => import("./testLab/TestLabDemoPage"));
+// /study — React / TypeScript / Sass 학습 페이지. 메인 번들과 분리.
+const StudyPage = lazy(() => import("./study/StudyPage"));
 
 const DEFAULT_FILTERS: FilterState = {
   stack: "All",
@@ -56,11 +61,17 @@ function AboutSection() {
   return (
     <section id="about" className="about-section">
       <div className="about__title">
-        <h2 className="section__title">Hs portfolio</h2>
-        <span className="section__title-accent">Frontend Developer</span>
+        <AnimatedText as="h2" className="section__title" text="Hs portfolio" />
+        <Reveal delay={0.3}>
+          <span className="section__title-accent">Frontend Developer</span>
+        </Reveal>
       </div>
+      <ScrollRevealParagraph
+        className="about__intro"
+        text="시장의 변화에 흐름에 맞춰 프론트엔드 개발로 전향하며 계속 배워 나아가고 있습니다."
+      />
       <div className="about__content">
-        <div className="about__text">
+        <Reveal className="about__text">
           <table style={{ marginBottom: "24px" }}>
             <colgroup>
               <col style={{ width: "30%" }} />
@@ -92,7 +103,7 @@ function AboutSection() {
           <a href="#projects" className="about__cta">
             View services
           </a>
-        </div>
+        </Reveal>
       </div>
     </section>
   );
@@ -145,7 +156,7 @@ function ProjectPage() {
     <>
       <AboutSection />
       <section id="projects" className="projects-section">
-        <Career />        
+        <Career />
       </section>
       <section id="stack" className="filters-section">
         <Filters
@@ -172,6 +183,9 @@ function App() {
             <Route path="/projects/:projectId" element={<ProjectPage />} />
             <Route path="/lab" element={<LabPage />} />
             <Route path="/lab/:demoId" element={<LabDemoPage />} />
+            <Route path="/testLab" element={<TestLabPage />} />
+            <Route path="/testLab/:demoId" element={<TestLabDemoPage />} />
+            <Route path="/study" element={<StudyPage />} />
           </Routes>
         </Suspense>
       </main>

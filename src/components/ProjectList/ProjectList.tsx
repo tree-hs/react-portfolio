@@ -3,6 +3,7 @@ import { fetchProjects } from "../../api/projects";
 import { Project } from "../../types/project";
 import ProjectCard from "../ProjectCard/ProjectCard";
 import { FilterState } from "../Filters/Filters";
+import { Reveal } from "../../motion";
 
 interface ProjectListProps {
   filters: FilterState;
@@ -60,12 +61,13 @@ function ProjectList({ filters, activeProjectId }: ProjectListProps) {
 
       {!loading && !error && projects.length > 0 ? (
         <div className="project-list">
-          {projects.map((project) => (
-            <ProjectCard
-              key={project.id}
-              project={project}
-              isActive={project.id === activeProjectId}
-            />
+          {projects.map((project, idx) => (
+            <Reveal key={project.id} delay={Math.min(idx * 0.06, 0.36)} y={32}>
+              <ProjectCard
+                project={project}
+                isActive={project.id === activeProjectId}
+              />
+            </Reveal>
           ))}
         </div>
       ) : null}
