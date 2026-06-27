@@ -74,36 +74,34 @@ function AboutSection() {
       />
       <div className="about__content">
         <Reveal className="about__text">
-          <table style={{ marginBottom: "24px" }}>
-            <colgroup>
-              <col style={{ width: "30%" }} />
-              <col style={{ width: "70%" }} />
-            </colgroup>
-            <tbody>
-              <tr>
-                <th>이름</th>
-                <td>정한석</td>
-              </tr>
-              <tr>
-                <th>생년월일</th>
-                <td>1991-07-03</td>
-              </tr>
-              <tr>
-                <th>이메일</th>
-                <td>harrison14@naver.com</td>
-              </tr>
-              <tr>
-                <th>학력</th>
-                <td>서일대 졸업 (인터넷정보과)</td>
-              </tr>
-              <tr>
-                <th>연락처</th>
-                <td>010-3268-2612</td>
-              </tr>
-            </tbody>
-          </table>
+          <dl className="about__facts">
+            <div className="about__fact">
+              <dt>이름</dt>
+              <dd>정한석</dd>
+            </div>
+            <div className="about__fact">
+              <dt>생년월일</dt>
+              <dd>1991. 07. 03</dd>
+            </div>
+            <div className="about__fact">
+              <dt>이메일</dt>
+              <dd>
+                <a href="mailto:harrison14@naver.com">harrison14@naver.com</a>
+              </dd>
+            </div>
+            <div className="about__fact">
+              <dt>학력</dt>
+              <dd>서일대학교 인터넷정보과 졸업</dd>
+            </div>
+            <div className="about__fact">
+              <dt>연락처</dt>
+              <dd>
+                <a href="tel:+821032682612">010-3268-2612</a>
+              </dd>
+            </div>
+          </dl>
           <a href="#projects" className="about__cta">
-            View services
+            프로젝트 보기 <span aria-hidden="true">→</span>
           </a>
         </Reveal>
       </div>
